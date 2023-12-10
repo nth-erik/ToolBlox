@@ -1,0 +1,64 @@
+==============================================================================
+
+ModelGen macros
+
+Object model fields used by the ModelGen converter (and QuakeC)
+
+==============================================================================
+
+----------
+Model name
+----------
+$modelname <filename>.<ext>
+
+---------------
+Resource folder
+---------------
+$cd <relative/path/to/textures/and/skins>
+
+------------
+Effect flags
+
+Automatic engine effects to apply:
+
+  1:   Rocket (Long smoke trail, grey and yellow - rises)
+  2:   Grenade (Long smoke trail, grey - rises)
+  4:   Gib (Long falling blood trails)
+  8:   Rotate (Self Explanatory)
+  16:  Tracer (Used for k_spike, Hellknights blasts, medium length trail - yellow and brown colored squares)
+  32:  Zombie Gib (Same as regular Gib, blood doesn't leave as long as trail)
+  64:  Tracer2 (Used for w_spike, Wizards blast - medium length green trail)
+  128: Tracer3 (Used for v_spike, Vores - short purple smoke trail)
+------------
+$flags <flagset>
+
+-------------------------------------
+Object displacement
+
+X, Y and Z offset of the model origin
+-------------------------------------
+$origin <0 -6 24>
+
+-------------------------
+Base frame 
+
+Skin projection reference
+Not used in animation
+-------------------------
+$base <base>
+
+-----------------------
+Skin filename
+
+NOTE: Without extension
+-----------------------
+$skin <skin>
+
+--------------------------------
+Animation frames
+
+Frames succeeding base frame
+Stored in floats, indexed from 0
+--------------------------------
+$ frames <var1 var2 var3>
+$ frames <var4 varn>
