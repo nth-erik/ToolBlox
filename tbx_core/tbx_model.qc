@@ -60,7 +60,7 @@ Load hard-coded models
 
 Loads models directly referenced by the engine.
 These must be loaded from the script, or the map will crash:
-  */ string TBX_MODEL_PLAYER = "progs/player.mdl"; /* player avatar
+  string TBX_MODEL_PLAYER = "progs/player.mdl"; // player avatar
 
 NOTE: Replace these model files with copies of 'progs/null.lmp' for greater
       control over what and when gets emitted by entities and effects.

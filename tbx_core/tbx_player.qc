@@ -62,14 +62,14 @@ Get weapon model
 
 Returns the current entity weapon model path.
 Only works with players:
- */ float TBX_FLAG_PLAYER = 8; /*
+  float TBX_FLAG_ROLE_PLAYER = 8;
 
 sourceEntity: the entity to read the value from
 -----------------------------------------------
 */
 string(entity sourceEntity) tbx_GetWeaponModel =
 {
-  if (!(sourceEntity.flags & TBX_FLAG_PLAYER))
+  if (!(sourceEntity.flags & TBX_FLAG_ROLE_PLAYER))
     return "";
 
   return sourceEntity.weaponmodel;
@@ -81,7 +81,7 @@ Set weapon model
 
 Updates the current entity weapon model path.
 Only works with players:
- // float TBX_FLAG_PLAYER = 8; //
+  float TBX_FLAG_ROLE_PLAYER = 8;
 
 targetEntity: the entity to change the value for
 newModelPath: the new weapon model path
@@ -89,7 +89,7 @@ newModelPath: the new weapon model path
 */
 void(entity targetEntity, string newModelPath) tbx_SetWeaponModel =
 {
-  if (!(targetEntity.flags & TBX_FLAG_PLAYER))
+  if (!(targetEntity.flags & TBX_FLAG_ROLE_PLAYER))
   {
     tbx_EntityError(
       targetEntity,
@@ -112,7 +112,7 @@ sourceEntity: the entity to read the value from
 */
 float(entity sourceEntity) tbx_GetWeaponFrame =
 {
-  if (!(sourceEntity.flags & TBX_FLAG_PLAYER))
+  if (!(sourceEntity.flags & TBX_FLAG_ROLE_PLAYER))
     return 0;
 
   return sourceEntity.weaponframe;
@@ -131,7 +131,7 @@ newFrame:     the weapon frame number to set (zero-based)
 */
 void(entity targetEntity, float newFrame) tbx_SetWeaponFrame =
 {
-  if (!(targetEntity.flags & TBX_FLAG_PLAYER))
+  if (!(targetEntity.flags & TBX_FLAG_ROLE_PLAYER))
   {
     tbx_EntityError(
       targetEntity,
@@ -154,7 +154,7 @@ targetEntity: the entity to change the value for
 */
 void(entity targetEntity) tbx_NextWeaponFrame =
 {
-  if (!(targetEntity.flags & TBX_FLAG_PLAYER))
+  if (!(targetEntity.flags & TBX_FLAG_ROLE_PLAYER))
   {
     tbx_EntityError(
       targetEntity,
@@ -177,7 +177,7 @@ targetEntity: the entity to change the value for
 */
 void(entity targetEntity) tbx_LastWeaponFrame =
 {
-  if (!(targetEntity.flags & TBX_FLAG_PLAYER))
+  if (!(targetEntity.flags & TBX_FLAG_ROLE_PLAYER))
   {
     tbx_EntityError(
       targetEntity,
@@ -204,7 +204,7 @@ void(entity targetEntity, float frameLimit) tbx_NextWeaponFrameUntil =
 {
   local float newFrame;
 
-  if (!(targetEntity.flags & TBX_FLAG_PLAYER))
+  if (!(targetEntity.flags & TBX_FLAG_ROLE_PLAYER))
   {
     tbx_EntityError(
       targetEntity,
@@ -236,7 +236,7 @@ void(entity targetEntity, float frameLimit) tbx_LastWeaponFrameUntil =
 {
   local float newFrame;
 
-  if (!(targetEntity.flags & TBX_FLAG_PLAYER))
+  if (!(targetEntity.flags & TBX_FLAG_ROLE_PLAYER))
   {
     tbx_EntityError(
       targetEntity,
@@ -273,7 +273,7 @@ void(
 {
   local float newFrame;
 
-  if (!(targetEntity.flags & TBX_FLAG_PLAYER))
+  if (!(targetEntity.flags & TBX_FLAG_ROLE_PLAYER))
   {
     tbx_EntityError(
       targetEntity,
@@ -310,7 +310,7 @@ void(
 {
   local float newFrame;
 
-  if (!(targetEntity.flags & TBX_FLAG_PLAYER))
+  if (!(targetEntity.flags & TBX_FLAG_ROLE_PLAYER))
   {
     tbx_EntityError(
       targetEntity,
@@ -340,7 +340,7 @@ sourceEntity: the entity to read the value from
 */
 float(entity sourceEntity) tbx_GetCurrentWeaponAmmo =
 {
-  if (!(sourceEntity.flags & TBX_FLAG_PLAYER))
+  if (!(sourceEntity.flags & TBX_FLAG_ROLE_PLAYER))
     return 0;
 
   return sourceEntity.currentammo;
@@ -358,7 +358,7 @@ newAmmo:      the amount of ammo to set
 */
 void(entity targetEntity, float newAmmo) tbx_SetCurrentWeaponAmmo =
 {
-  if (!(targetEntity.flags & TBX_FLAG_PLAYER))
+  if (!(targetEntity.flags & TBX_FLAG_ROLE_PLAYER))
   {
     tbx_EntityError(
       targetEntity,
@@ -388,15 +388,15 @@ Please do not change these.
 Get stored value
 
 Returns the stored parameter for provided index:
-  */ float STOREDVALUE_ITEMFLAGS = 1; /*
-  */ float STOREDVALUE_HEALTH = 2; /*
-  */ float STOREDVALUE_ARMORHEALTH = 3; /*
-  */ float STOREDVALUE_SHELLS = 4; /*
-  */ float STOREDVALUE_NAILS = 5; /*
-  */ float STOREDVALUE_ROCKETS = 6; /*
-  */ float STOREDVALUE_CELLS = 7; /*
-  */ float STOREDVALUE_WEAPONFLAGS = 8; /*
-  */ float STOREDVALUE_ARMORTYPE = 9; /* armor type times 100
+  float STOREDVALUE_ITEMFLAGS = 1;
+  float STOREDVALUE_HEALTH = 2;
+  float STOREDVALUE_ARMORHEALTH = 3;
+  float STOREDVALUE_SHELLS = 4;
+  float STOREDVALUE_NAILS = 5;
+  float STOREDVALUE_ROCKETS = 6;
+  float STOREDVALUE_CELLS = 7;
+  float STOREDVALUE_WEAPONFLAGS = 8;
+  float STOREDVALUE_ARMORTYPE = 9;   // armor type times 100
 
 10-16 are customizable for modding.
 Set new constants in your mod files.
@@ -469,15 +469,15 @@ float(float valueIndex) tbx_GetStoredValue =
 Set stored value
 
 Sets the stored parameter to the provided value at the index:
-  // float STOREDVALUE_ITEMFLAGS = 1; //
-  // float STOREDVALUE_HEALTH = 2; //
-  // float STOREDVALUE_ARMORHEALTH = 3; //
-  // float STOREDVALUE_SHELLS = 4; //
-  // float STOREDVALUE_NAILS = 5; //
-  // float STOREDVALUE_ROCKETS = 6; //
-  // float STOREDVALUE_CELLS = 7; //
-  // float STOREDVALUE_WEAPONFLAGS = 8; //
-  // float STOREDVALUE_ARMORTYPE = 9; // armor type times 100
+  float STOREDVALUE_ITEMFLAGS = 1;
+  float STOREDVALUE_HEALTH = 2;
+  float STOREDVALUE_ARMORHEALTH = 3;
+  float STOREDVALUE_SHELLS = 4;
+  float STOREDVALUE_NAILS = 5;
+  float STOREDVALUE_ROCKETS = 6;
+  float STOREDVALUE_CELLS = 7;
+  float STOREDVALUE_WEAPONFLAGS = 8;
+  float STOREDVALUE_ARMORTYPE = 9;   // armor type times 100
 
 10-16 are customizable for modding.
 Set new constants in your mod files.

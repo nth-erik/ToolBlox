@@ -107,19 +107,19 @@ Please do not change these.
 Get relative direction
 
 Returns a relative direction unit vector for the requested orientation(s):
-  */ float DIRECTIONFLAG_RIGHT = 1; /*
-  */ float DIRECTIONFLAG_FORWARD = 2; /*
-  */ float DIRECTIONFLAG_UP = 4; /*
-  */ float DIRECTIONFLAG_LEFT = 8; /*
-  */ float DIRECTIONFLAG_BACKWARD = 16; /*
-  */ float DIRECTIONFLAG_DOWN = 32; /*
+float TBX_DIRECTIONFLAG_RIGHT = 1;
+float TBX_DIRECTIONFLAG_FORWARD = 2;
+float TBX_DIRECTIONFLAG_UP = 4;
+float TBX_DIRECTIONFLAG_LEFT = 8;
+float TBX_DIRECTIONFLAG_BACKWARD = 16;
+float TBX_DIRECTIONFLAG_DOWN = 32;
 
 You can freely combine the direction flags to get diagonal units as well.
 
 sourceAngles: Facing pitch-yaw-roll to derive axes from
 targetDirection: Relative direction vector to get using the above constants
 
-NOTE: The direction flags DO NOT STACK.
+NOTE: Direction flags of the same type DO NOT STACK.
 -----------------------------------------------------------------------------
 */
 vector(vector sourceAngles, float targetDirection) tbx_GetRelativeDirection =
@@ -129,22 +129,22 @@ vector(vector sourceAngles, float targetDirection) tbx_GetRelativeDirection =
   combinedDirection = '0 0 0';
   tbx_ProduceRelativeUnitVectors(sourceAngles);
 
-  if (targetDirection & DIRECTIONFLAG_RIGHT)
+  if (targetDirection & TBX_DIRECTIONFLAG_RIGHT)
     combinedDirection = combinedDirection + v_right;
 
-  if (targetDirection & DIRECTIONFLAG_FORWARD)
+  if (targetDirection & TBX_DIRECTIONFLAG_FORWARD)
     combinedDirection = combinedDirection + v_forward;
 
-  if (targetDirection & DIRECTIONFLAG_UP)
+  if (targetDirection & TBX_DIRECTIONFLAG_UP)
     combinedDirection = combinedDirection + v_up;
 
-  if (targetDirection & DIRECTIONFLAG_LEFT)
+  if (targetDirection & TBX_DIRECTIONFLAG_LEFT)
     combinedDirection = combinedDirection - v_right;
 
-  if (targetDirection & DIRECTIONFLAG_BACKWARD)
+  if (targetDirection & TBX_DIRECTIONFLAG_BACKWARD)
     combinedDirection = combinedDirection - v_forward;
 
-  if (targetDirection & DIRECTIONFLAG_DOWN)
+  if (targetDirection & TBX_DIRECTIONFLAG_DOWN)
     combinedDirection = combinedDirection - v_up;
 
   return tbx_GetUnitVector(combinedDirection);

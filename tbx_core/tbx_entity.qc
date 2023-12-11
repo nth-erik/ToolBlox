@@ -345,8 +345,8 @@ coordinates.
 Use tbx_SetBounds() to update.
 
 Human-sized:
-  */ vector TBX_SMALL_BOUNDS_MIN = '-16 -16 -24'; /*
-  */ vector TBX_SMALL_BOUNDS_MAX = '16 16 32'; /*
+  vector TBX_SMALL_BOUNDS_MIN = '-16 -16 -24'; // human left-rear-bottom
+  vector TBX_SMALL_BOUNDS_MAX = '16 16 32';    // human right-front-top
 
 sourceEntity: the entity to read the value from
 -------------------------------------------------------------------------
@@ -412,26 +412,26 @@ void(entity targetEntity, float timeDelta) tbx_AddLocalTime =
 };
 
 /*
------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 Get move type
 
 Returns the move type of the entity:
-                                      +---------+---------+--------+--------+
-                                      | gravity | collide | contol | player |
-                                      +---------+---------+--------+--------+
-*/ float TBX_MOVETYPE_NONE = 0; /*    | no      | no      | never  | yes    |
-*/ float TBX_MOVETYPE_MOVE = 3; /*    | drop    | all     | always | yes    |
-*/ float TBX_MOVETYPE_FRAME = 4; /*   | drop    | no      | never  | no     |
-*/ float TBX_MOVETYPE_HOVER = 5; /*   | no      | all     | always | yes    |
-*/ float TBX_MOVETYPE_DROP = 6; /*    | drop    | all     | in air | yes    |
-*/ float TBX_MOVETYPE_WALL = 7; /*    | no      | entity  | never  | no     |
-*/ float TBX_MOVETYPE_NOCLIP = 8; /*  | no      | no      | always | yes    |
-*/ float TBX_MOVETYPE_SHOT = 9; /*    | no      | all     | never  | no     |
-*/ float TBX_MOVETYPE_BOUNCE = 10; /* | bounce  | all     | in air | yes    |
-                                      +---------+---------+--------+--------+
+                                  // +---------+---------+--------+--------+
+                                  // | gravity | collide | contol | player |
+                                  // +---------+---------+--------+--------+
+  float TBX_MOVETYPE_NONE = 0;    // | no      | no      | never  | yes    |
+  float TBX_MOVETYPE_MOVE = 3;    // | drop    | all     | always | yes    |
+  float TBX_MOVETYPE_FRAME = 4;   // | drop    | no      | never  | no     |
+  float TBX_MOVETYPE_HOVER = 5;   // | no      | all     | always | yes    |
+  float TBX_MOVETYPE_DROP = 6;    // | drop    | all     | in air | yes    |
+  float TBX_MOVETYPE_WALL = 7;    // | no      | entity  | never  | no     |
+  float TBX_MOVETYPE_NOCLIP = 8;  // | no      | no      | always | yes    |
+  float TBX_MOVETYPE_SHOT = 9;    // | no      | all     | never  | no     |
+  float TBX_MOVETYPE_BOUNCE = 10; // | bounce  | all     | in air | yes    |
+                                  // +---------+---------+--------+--------+
 
 sourceEntity: the entity to read the value from
------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 */
 float(entity sourceEntity) tbx_GetMoveType =
 {
@@ -439,23 +439,23 @@ float(entity sourceEntity) tbx_GetMoveType =
 };
 
 /*
------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 Set move type
 
 Sets the move type of the entity:
-                                      +---------+---------+--------+--------+
-                                      | gravity | collide | contol | player |
-                                      +---------+---------+--------+--------+
-// float TBX_MOVETYPE_NONE = 0; //    | no      | no      | never  | yes    |
-// float TBX_MOVETYPE_MOVE = 3; //    | drop    | all     | always | yes    |
-// float TBX_MOVETYPE_FRAME = 4; //   | drop    | no      | never  | no     |
-// float TBX_MOVETYPE_HOVER = 5; //   | no      | all     | always | yes    |
-// float TBX_MOVETYPE_DROP = 6; //    | drop    | all     | in air | yes    |
-// float TBX_MOVETYPE_WALL = 7; //    | no      | entity  | never  | no     |
-// float TBX_MOVETYPE_NOCLIP = 8; //  | no      | no      | always | yes    |
-// float TBX_MOVETYPE_SHOT = 9; //    | no      | all     | never  | no     |
-// float TBX_MOVETYPE_BOUNCE = 10; // | bounce  | all     | in air | yes    |
-                                      +---------+---------+--------+--------+
+                                  // +---------+---------+--------+--------+
+                                  // | gravity | collide | contol | player |
+                                  // +---------+---------+--------+--------+
+  float TBX_MOVETYPE_NONE = 0;    // | no      | no      | never  | yes    |
+  float TBX_MOVETYPE_MOVE = 3;    // | drop    | all     | always | yes    |
+  float TBX_MOVETYPE_FRAME = 4;   // | drop    | no      | never  | no     |
+  float TBX_MOVETYPE_HOVER = 5;   // | no      | all     | always | yes    |
+  float TBX_MOVETYPE_DROP = 6;    // | drop    | all     | in air | yes    |
+  float TBX_MOVETYPE_WALL = 7;    // | no      | entity  | never  | no     |
+  float TBX_MOVETYPE_NOCLIP = 8;  // | no      | no      | always | yes    |
+  float TBX_MOVETYPE_SHOT = 9;    // | no      | all     | never  | no     |
+  float TBX_MOVETYPE_BOUNCE = 10; // | bounce  | all     | in air | yes    |
+                                  // +---------+---------+--------+--------+
 
 Use TBX_MOVETYPE_NONE for props and cams.
 Use TBX_MOVETYPE_MOVE for interactive players.
@@ -469,7 +469,7 @@ Use TBX_MOVETYPE_BOUNCE for grenades and gibs.
 
 targetEntity: the entity to change the value for
 newMoveType:  the move type to set
------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 */
 void(entity targetEntity, float newMoveType) tbx_SetMoveType =
 {
@@ -477,22 +477,22 @@ void(entity targetEntity, float newMoveType) tbx_SetMoveType =
 };
 
 /*
----------------------------------------------------------------------
+------------------------------------------------------------------
 Get solid type
 
 Returns the solidity type of the entity:
-                                          +-------+---------+-------+
-                                          | shape | collide | touch |
-                                          +-------+---------+-------+
-  */ float TBX_SOLIDTYPE_NOT = 0; /*      | box   | none    | no    |
-  */ float TBX_SOLIDTYPE_TRIGGER = 1; /*  | box   | none    | yes   |
-  */ float TBX_SOLIDTYPE_BOX = 2; /*      | box   | ground  | yes   |
-  */ float TBX_SOLIDTYPE_SLIDEBOX = 3; /* | box   | slide   | yes   |
-  */ float TBX_SOLIDTYPE_BSP = 4; /*      | BSP   | ground  | yes   |
-                                          +-------+---------+-------+
+                                    // +-------+---------+-------+
+                                    // | shape | collide | touch |
+                                    // +-------+---------+-------+
+  float TBX_SOLIDTYPE_NOT = 0;      // | box   | none    | no    |
+  float TBX_SOLIDTYPE_TRIGGER = 1;  // | box   | none    | yes   |
+  float TBX_SOLIDTYPE_BOX = 2;      // | box   | ground  | yes   |
+  float TBX_SOLIDTYPE_SLIDEBOX = 3; // | box   | slide   | yes   |
+  float TBX_SOLIDTYPE_BSP = 4;      // | BSP   | ground  | yes   |
+                                    // +-------+---------+-------+
 
 sourceEntity: the entity to read the value from
----------------------------------------------------------------------
+------------------------------------------------------------------
 */
 float(entity sourceEntity) tbx_GetSolidType =
 {
@@ -500,23 +500,23 @@ float(entity sourceEntity) tbx_GetSolidType =
 };
 
 /*
----------------------------------------------------------------------
+------------------------------------------------------------------
 Set solid type
 
 Sets the solidity type of the entity:
-                                          +-------+---------+-------+
-                                          | shape | collide | touch |
-                                          +-------+---------+-------+
-  // float TBX_SOLIDTYPE_NOT = 0; //      | box   | none    | no    |
-  // float TBX_SOLIDTYPE_TRIGGER = 1; //  | box   | none    | yes   |
-  // float TBX_SOLIDTYPE_BOX = 2; //      | box   | ground  | yes   |
-  // float TBX_SOLIDTYPE_SLIDEBOX = 3; // | box   | slide   | yes   |
-  // float TBX_SOLIDTYPE_BSP = 4; //      | BSP   | ground  | yes   |
-                                          +-------+---------+-------+
+                                    // +-------+---------+-------+
+                                    // | shape | collide | touch |
+                                    // +-------+---------+-------+
+  float TBX_SOLIDTYPE_NOT = 0;      // | box   | none    | no    |
+  float TBX_SOLIDTYPE_TRIGGER = 1;  // | box   | none    | yes   |
+  float TBX_SOLIDTYPE_BOX = 2;      // | box   | ground  | yes   |
+  float TBX_SOLIDTYPE_SLIDEBOX = 3; // | box   | slide   | yes   |
+  float TBX_SOLIDTYPE_BSP = 4;      // | BSP   | ground  | yes   |
+                                    // +-------+---------+-------+
 
 targetEntity: the entity to change the value for
 newSolidType: the solidity type to set
----------------------------------------------------------------------
+------------------------------------------------------------------
 */
 void(entity targetEntity, float newSolidType) tbx_SetSolidType =
 {
@@ -1028,11 +1028,10 @@ void(entity targetEntity, float newSkin) tbx_SetSkin =
 Get effect flags
 
 Returns the current entity special effect flagset:
-
-  */ float TBX_EFFECTFLAG_FIELD = 1; /* yellow particle field
-  */ float TBX_EFFECTFLAG_DIMFLASH = 2; /* dim flash (resets)
-  */ float TBX_EFFECTFLAG_BRIGHTLIGHT = 4; /* bright light (Quad)
-  */ float TBX_EFFECTFLAG_DIMLIGHT = 8; /* dim light (laser)
+  float TBX_EFFECTFLAG_FIELD = 1;       // yellow particle field
+  float TBX_EFFECTFLAG_DIMFLASH = 2;    // dim flash (resets)
+  float TBX_EFFECTFLAG_BRIGHTLIGHT = 4; // bright light (Quad)
+  float TBX_EFFECTFLAG_DIMLIGHT = 8;    // dim light (laser)
 
 sourceEntity: the entity to read the value from
 -----------------------------------------------------------------
@@ -1047,11 +1046,10 @@ float(entity sourceEntity) tbx_GetEffectFlags =
 Set effect flags
 
 Updates the current entity special effect flagset:
-
-  // float TBX_EFFECTFLAG_FIELD = 1; // yellow particle field
-  // float TBX_EFFECTFLAG_DIMFLASH = 2; // dim flash (resets)
-  // float TBX_EFFECTFLAG_BRIGHTLIGHT = 4; // bright light (Quad)
-  // float TBX_EFFECTFLAG_DIMLIGHT = 8; // dim light (laser)
+  float TBX_EFFECTFLAG_FIELD = 1;       // yellow particle field
+  float TBX_EFFECTFLAG_DIMFLASH = 2;    // dim flash (resets)
+  float TBX_EFFECTFLAG_BRIGHTLIGHT = 4; // bright light (Quad)
+  float TBX_EFFECTFLAG_DIMLIGHT = 8;    // dim light (laser)
 
 Use 'tbx_flags.qc' functions to manage this more efficiently.
 
@@ -1163,7 +1161,7 @@ void(entity targetEntity, void() newOnBlocked) tbx_SetOnBlocked =
 Think start
 
 Executes the current entity behavior on next ToolBlox default frame tick:
-*/ float TBX_FRAMETICK = 0.1; /*
+  float TBX_FRAMETICK = 0.1;
 
 targetEntity: the entity to think
 --------------------------------------------------------------------------
@@ -1379,22 +1377,23 @@ void(entity targetEntity, float addedFrags) tbx_AddFrags =
 };
 
 /*
---------------------------------------------------
+--------------------------------------------------------
 Get current weapon
 
 Returns the current entity selected weapon flag:
-  */ float TBX_WEAPONFLAG_SHOTGUN = 1; /*
-  */ float TBX_WEAPONFLAG_DBSHOTGUN = 2; /*
-  */ float TBX_WEAPONFLAG_NAILGUN = 4; /*
-  */ float TBX_WEAPONFLAG_PERFORATOR = 8; /*
-  */ float TBX_WEAPONFLAG_GRENADELAUNCHER = 16; /*
-  */ float TBX_WEAPONFLAG_ROCKETLAUNCHER = 32; /*
-  */ float TBX_WEAPONFLAG_THUNDERBOLT = 64; /*
-  // float TBX_WEAPONFLAG_SLOT9_UNUSED = 128; //
-  */ float TBX_WEAPONFLAG_AXE = 4096; /*
+  float TBX_WEAPONFLAG_SHOTGUN = 1;
+  float TBX_WEAPONFLAG_DBSHOTGUN = 2;
+  float TBX_WEAPONFLAG_NAILGUN = 4;
+  float TBX_WEAPONFLAG_PERFORATOR = 8;
+  float TBX_WEAPONFLAG_GRENADELAUNCHER = 16;
+  float TBX_WEAPONFLAG_ROCKETLAUNCHER = 32;
+  float TBX_WEAPONFLAG_THUNDERBOLT = 64;
+  // This one is unused, define it as a MYMOD_ variable.
+  // float TBX_WEAPONFLAG_SLOT9_UNUSED = 128;
+  float TBX_WEAPONFLAG_AXE = 4096;
 
 sourceEntity: the entity to read the value from
---------------------------------------------------
+--------------------------------------------------------
 */
 float(entity sourceEntity) tbx_GetCurrentWeapon =
 {
@@ -1406,15 +1405,16 @@ float(entity sourceEntity) tbx_GetCurrentWeapon =
 Set current weapon
 
 Updates the current entity selected weapon flag:
-  // float TBX_WEAPONFLAG_SHOTGUN = 1; //
-  // float TBX_WEAPONFLAG_DBSHOTGUN = 2; //
-  // float TBX_WEAPONFLAG_NAILGUN = 4; //
-  // float TBX_WEAPONFLAG_PERFORATOR = 8; //
-  // float TBX_WEAPONFLAG_GRENADELAUNCHER = 16; //
-  // float TBX_WEAPONFLAG_ROCKETLAUNCHER = 32; //
-  // float TBX_WEAPONFLAG_THUNDERBOLT = 64; //
-  // float TBX_WEAPONFLAG_SLOT9_UNUSED = 128; //
-  // float TBX_WEAPONFLAG_AXE = 4096; //
+  float TBX_WEAPONFLAG_SHOTGUN = 1;
+  float TBX_WEAPONFLAG_DBSHOTGUN = 2;
+  float TBX_WEAPONFLAG_NAILGUN = 4;
+  float TBX_WEAPONFLAG_PERFORATOR = 8;
+  float TBX_WEAPONFLAG_GRENADELAUNCHER = 16;
+  float TBX_WEAPONFLAG_ROCKETLAUNCHER = 32;
+  float TBX_WEAPONFLAG_THUNDERBOLT = 64;
+  // This one is unused, define it as a MYMOD_ variable.
+  // float TBX_WEAPONFLAG_SLOT9_UNUSED = 128;
+  float TBX_WEAPONFLAG_AXE = 4096;
 
 NOTE: Does NOT set ammo type.
 
@@ -1552,38 +1552,37 @@ void(entity targetEntity, float newAmmo) tbx_SetCells =
 };
 
 /*
-------------------------------------------------------------------------
+---------------------------------------------------------------------
 Get items
 
 Returns the current entity item inventory flagset:
-  */ float TBX_ITEMFLAG_SHOTGUN = 1; /*          Shotgun weapon
-  */ float TBX_ITEMFLAG_DBSHOTGUN = 2; /*        Double-barraled shotgun
-  */ float TBX_ITEMFLAG_NAILGUN = 4; /*          Nailgun weapon
-  */ float TBX_ITEMFLAG_PERFORATOR = 8; /*       Perforator weapon
-  */ float TBX_ITEMFLAG_GRENADELAUNCHER = 16; /* Grenade launcher weapon
-  */ float TBX_ITEMFLAG_ROCKETLAUNCHER = 32; /*  Rocket launcher weapon
-  */ float TBX_ITEMFLAG_THUNDERBOLT = 64; /*     Thunderbolt weapon
-  */ float TBX_ITEMFLAG_SLOT9_UNUSED = 128; /*   n/a
-  */ float TBX_ITEMFLAG_SHELLS = 256; /*         Shell ammo
-  */ float TBX_ITEMFLAG_NAILS = 512; /*          Nail ammo
-  */ float TBX_ITEMFLAG_ROCKETS = 1024; /*       Rocket ammo
-  */ float TBX_ITEMFLAG_CELLS = 2048; /*         Cell ammo
-  */ float TBX_ITEMFLAG_AXE = 4096; /*           Axe weapon
-  */ float TBX_ITEMFLAG_ARMOR1_LIGHT = 8192; /*  Light (teal) armor
-  */ float TBX_ITEMFLAG_ARMOR2_HEAVY = 16384; /* Heavy (yellow) armor
-  */ float TBX_ITEMFLAG_ARMOR_FULL = 32768; /*   Full (red) armor
-  */ float TBX_ITEMFLAG_MEGAHEALTH = 65536; /*   Megahealth
-  */ float TBX_ITEMFLAG_KEY1 = 131072; /*        Silver key item
-  */ float TBX_ITEMFLAG_KEY2 = 262144; /*        Gold key item
-  */ float TBX_ITEMFLAG_RING = 524288; /*        Ring of Shadows
-  */ float TBX_ITEMFLAG_PENTAGRAM = 1048576; /*  Pentagram of Protection
-  */ float TBX_ITEMFLAG_BIOSUIT = 2097152; /*    Biosuit
-  */ float TBX_ITEMFLAG_QUAD = 4194304; /*       Quad Damage
+  float TBX_ITEMFLAG_SHOTGUN = 1;          // Shotgun weapon
+  float TBX_ITEMFLAG_DBSHOTGUN = 2;        // Double-barraled shotgun
+  float TBX_ITEMFLAG_NAILGUN = 4;          // Nailgun weapon
+  float TBX_ITEMFLAG_PERFORATOR = 8;       // Perforator weapon
+  float TBX_ITEMFLAG_GRENADELAUNCHER = 16; // Grenade launcher weapon
+  float TBX_ITEMFLAG_ROCKETLAUNCHER = 32;  // Rocket launcher weapon
+  float TBX_ITEMFLAG_THUNDERBOLT = 64;     // Thunderbolt weapon
+  float TBX_ITEMFLAG_SHELLS = 256;         // Shell ammo
+  float TBX_ITEMFLAG_NAILS = 512;          // Nail ammo
+  float TBX_ITEMFLAG_ROCKETS = 1024;       // Rocket ammo
+  float TBX_ITEMFLAG_CELLS = 2048;         // Cell ammo
+  float TBX_ITEMFLAG_AXE = 4096;           // Axe weapon
+  float TBX_ITEMFLAG_ARMOR1_LIGHT = 8192;  // Light (teal) armor
+  float TBX_ITEMFLAG_ARMOR2_HEAVY = 16384; // Heavy (yellow) armor
+  float TBX_ITEMFLAG_ARMOR_FULL = 32768;   // Full (red) armor
+  float TBX_ITEMFLAG_MEGAHEALTH = 65536;   // Megahealth
+  float TBX_ITEMFLAG_KEY1 = 131072;        // Silver key item
+  float TBX_ITEMFLAG_KEY2 = 262144;        // Gold key item
+  float TBX_ITEMFLAG_RING = 524288;        // Ring of Shadows
+  float TBX_ITEMFLAG_PENTAGRAM = 1048576;  // Pentagram of Protection
+  float TBX_ITEMFLAG_BIOSUIT = 2097152;    // Biosuit
+  float TBX_ITEMFLAG_QUAD = 4194304;       // Quad Damage
 
 NOTE: These are displayed in HUD.
 
 sourceEntity: the entity to read the value from
-------------------------------------------------------------------------
+---------------------------------------------------------------------
 */
 float(entity sourceEntity) tbx_GetItems =
 {
@@ -1591,33 +1590,32 @@ float(entity sourceEntity) tbx_GetItems =
 };
 
 /*
-------------------------------------------------------------------------
+---------------------------------------------------------------------
 Set items
 
 Updates the current entity item inventory flagset:
-  // float TBX_ITEMFLAG_SHOTGUN = 1; //          Shotgun weapon
-  // float TBX_ITEMFLAG_DBSHOTGUN = 2; //        Double-barraled shotgun
-  // float TBX_ITEMFLAG_NAILGUN = 4; //          Nailgun weapon
-  // float TBX_ITEMFLAG_PERFORATOR = 8; //       Perforator weapon
-  // float TBX_ITEMFLAG_GRENADELAUNCHER = 16; // Grenade launcher weapon
-  // float TBX_ITEMFLAG_ROCKETLAUNCHER = 32; //  Rocket launcher weapon
-  // float TBX_ITEMFLAG_THUNDERBOLT = 64; //     Thunderbolt weapon
-  // float TBX_ITEMFLAG_SLOT9_UNUSED = 128; //   n/a
-  // float TBX_ITEMFLAG_SHELLS = 256; //         Shell ammo
-  // float TBX_ITEMFLAG_NAILS = 512; //          Nail ammo
-  // float TBX_ITEMFLAG_ROCKETS = 1024; //       Rocket ammo
-  // float TBX_ITEMFLAG_CELLS = 2048; //         Cell ammo
-  // float TBX_ITEMFLAG_AXE = 4096; //           Axe weapon
-  // float TBX_ITEMFLAG_ARMOR1_LIGHT = 8192; //  Light (teal) armor
-  // float TBX_ITEMFLAG_ARMOR2_HEAVY = 16384; // Heavy (yellow) armor
-  // float TBX_ITEMFLAG_ARMOR_FULL = 32768; //   Full (red) armor
-  // float TBX_ITEMFLAG_MEGAHEALTH = 65536; //   Megahealth
-  // float TBX_ITEMFLAG_KEY1 = 131072; //        Silver key item
-  // float TBX_ITEMFLAG_KEY2 = 262144; //        Gold key item
-  // float TBX_ITEMFLAG_RING = 524288; //        Ring of Shadows
-  // float TBX_ITEMFLAG_PENTAGRAM = 1048576; //  Pentagram of Protection
-  // float TBX_ITEMFLAG_BIOSUIT = 2097152; //    Biosuit
-  // float TBX_ITEMFLAG_QUAD = 4194304; //       Quad Damage
+  float TBX_ITEMFLAG_SHOTGUN = 1;          // Shotgun weapon
+  float TBX_ITEMFLAG_DBSHOTGUN = 2;        // Double-barraled shotgun
+  float TBX_ITEMFLAG_NAILGUN = 4;          // Nailgun weapon
+  float TBX_ITEMFLAG_PERFORATOR = 8;       // Perforator weapon
+  float TBX_ITEMFLAG_GRENADELAUNCHER = 16; // Grenade launcher weapon
+  float TBX_ITEMFLAG_ROCKETLAUNCHER = 32;  // Rocket launcher weapon
+  float TBX_ITEMFLAG_THUNDERBOLT = 64;     // Thunderbolt weapon
+  float TBX_ITEMFLAG_SHELLS = 256;         // Shell ammo
+  float TBX_ITEMFLAG_NAILS = 512;          // Nail ammo
+  float TBX_ITEMFLAG_ROCKETS = 1024;       // Rocket ammo
+  float TBX_ITEMFLAG_CELLS = 2048;         // Cell ammo
+  float TBX_ITEMFLAG_AXE = 4096;           // Axe weapon
+  float TBX_ITEMFLAG_ARMOR1_LIGHT = 8192;  // Light (teal) armor
+  float TBX_ITEMFLAG_ARMOR2_HEAVY = 16384; // Heavy (yellow) armor
+  float TBX_ITEMFLAG_ARMOR_FULL = 32768;   // Full (red) armor
+  float TBX_ITEMFLAG_MEGAHEALTH = 65536;   // Megahealth
+  float TBX_ITEMFLAG_KEY1 = 131072;        // Silver key item
+  float TBX_ITEMFLAG_KEY2 = 262144;        // Gold key item
+  float TBX_ITEMFLAG_RING = 524288;        // Ring of Shadows
+  float TBX_ITEMFLAG_PENTAGRAM = 1048576;  // Pentagram of Protection
+  float TBX_ITEMFLAG_BIOSUIT = 2097152;    // Biosuit
+  float TBX_ITEMFLAG_QUAD = 4194304;       // Quad Damage
 
 Use 'tbx_flags.qc' functions to manage this more efficiently.
 
@@ -1625,7 +1623,7 @@ NOTE: Displayed in HUD.
 
 targetEntity: the entity to change the value for
 newItems:     the item flagset to apply
-------------------------------------------------------------------------
+---------------------------------------------------------------------
 */
 void(entity targetEntity, float newItems) tbx_SetItems =
 {
@@ -1633,16 +1631,16 @@ void(entity targetEntity, float newItems) tbx_SetItems =
 };
 
 /*
------------------------------------------------------------------------------
+--------------------------------------------------------------------------
 Get vulnerability
 
 Returns the current entity vulnerability type:
-  */ float TBX_VULNERABILITY_OFF = 0; /* Does not take damage
-  */ float TBX_VULNERABILITY_HIT = 1; /* Projectile and blast damage
-  */ float TBX_VULNERABILITY_ALL = 2; /* Projectile, blast and grenade damage
+  float TBX_VULNERABILITY_OFF = 0; // Does not take damage
+  float TBX_VULNERABILITY_HIT = 1; // Projectile and blast damage
+  float TBX_VULNERABILITY_ALL = 2; // Projectile, blast and grenade damage
 
 sourceEntity: the entity to read the value from
------------------------------------------------------------------------------
+--------------------------------------------------------------------------
 */
 float(entity sourceEntity) tbx_GetVulnerability =
 {
@@ -1650,17 +1648,17 @@ float(entity sourceEntity) tbx_GetVulnerability =
 };
 
 /*
------------------------------------------------------------------------------
+--------------------------------------------------------------------------
 Set vulnerability
 
 Updates the current entity vulnerability type:
-  // float TBX_VULNERABILITY_OFF = 0; // Does not take damage
-  // float TBX_VULNERABILITY_HIT = 1; // Projectile and blast damage
-  // float TBX_VULNERABILITY_ALL = 2; // Projectile, blast and grenade damage
+  float TBX_VULNERABILITY_OFF = 0; // Does not take damage
+  float TBX_VULNERABILITY_HIT = 1; // Projectile and blast damage
+  float TBX_VULNERABILITY_ALL = 2; // Projectile, blast and grenade damage
 
 targetEntity: the entity to change the value for
 newType:      the type to set
------------------------------------------------------------------------------
+--------------------------------------------------------------------------
 */
 void(entity targetEntity, float newType) tbx_SetVulnerability =
 {
@@ -1689,10 +1687,10 @@ entity(entity sourceEntity) tbx_GetNextInRadius =
 Get vitals
 
 Returns the current entity vital state:
-  */ float TBX_VITALS_ALIVE = 0; /* Functioning
-  */ float TBX_VITALS_DYING = 1; /* Dropping dead
-  */ float TBX_VITALS_DEAD = 2; /*  Static corpse
-  */ float TBX_VITALS_OUT = 3; /*   Ready for respawn
+  float TBX_VITALS_ALIVE = 0; // Functioning
+  float TBX_VITALS_DYING = 1; // Dropping dead
+  float TBX_VITALS_DEAD = 2;  // Static corpse
+  float TBX_VITALS_OUT = 3;   // Ready for respawn
 
 sourceEntity: the entity to read the value from
 -----------------------------------------------------
@@ -1707,10 +1705,10 @@ float(entity sourceEntity) tbx_GetVitals =
 Set vitals
 
 Updates the current entity vital state:
-  // float TBX_VITALS_ALIVE = 0; // Functioning
-  // float TBX_VITALS_DYING = 1; // Dropping dead
-  // float TBX_VITALS_DEAD = 2; //  Static corpse
-  // float TBX_VITALS_OUT = 3; //   Ready for respawn
+  float TBX_VITALS_ALIVE = 0; // Functioning
+  float TBX_VITALS_DYING = 1; // Dropping dead
+  float TBX_VITALS_DEAD = 2;  // Static corpse
+  float TBX_VITALS_OUT = 3;   // Ready for respawn
 
 targetEntity: the entity to change the value for
 newVitals: vital state to set
@@ -1741,7 +1739,7 @@ Set eye position
 
 Updates the current entity eye position relative to its origin.
 Used as camera position for players:
-  */ vector TBX_PLAYER_EYE_POSITION = '0 0 22'; /*
+  vector TBX_PLAYER_EYE_POSITION = '0 0 22';
 
 targetEntity: the entity to change the value for
 newPosition:  eye position to set
@@ -2055,10 +2053,9 @@ void(entity targetEntity, entity newEnemy) tbx_SetEnemy =
 Get move flags
 
 Returns the current entity movement flags:
-
-  */ float TBX_FLAG_MOVE_FLY = 1; /*
-  */ float TBX_FLAG_MOVE_SWIM = 2; /*
-  */ float TBX_FLAG_MOVE_ALL = 3; /*
+  float TBX_FLAG_MOVE_FLY = 1;
+  float TBX_FLAG_MOVE_SWIM = 2;
+  float TBX_FLAG_MOVE_ALL = 3;
 
 sourceEntity: the entity to read the value from
 -----------------------------------------------
@@ -2075,10 +2072,9 @@ float(entity sourceEntity) tbx_GetMoveFlags =
 Set move flags
 
 Updates the current entity movement flags:
-
-  // float TBX_FLAG_MOVE_FLY = 1; //
-  // float TBX_FLAG_MOVE_SWIM = 2; //
-  // float TBX_FLAG_MOVE_ALL = 3; //
+  float TBX_FLAG_MOVE_FLY = 1;
+  float TBX_FLAG_MOVE_SWIM = 2;
+  float TBX_FLAG_MOVE_ALL = 3;
 
 NOTE: This setter pre-filters the flagset.
 
@@ -2101,10 +2097,9 @@ void(entity targetEntity, float newFlags) tbx_SetMoveFlags =
 Get role flags
 
 Returns the current entity role flags:
-
-  */ float TBX_FLAG_ROLE_PLAYER = 8; /*
-  */ float TBX_FLAG_ROLE_NPC = 32; /*
-  */ float TBX_FLAG_ROLE_ALL = 40; /*
+  float TBX_FLAG_ROLE_PLAYER = 8;
+  float TBX_FLAG_ROLE_NPC = 32;
+  float TBX_FLAG_ROLE_ALL = 40;
 
 sourceEntity: the entity to read the value from
 -----------------------------------------------
@@ -2121,10 +2116,9 @@ float(entity sourceEntity) tbx_GetRoleFlags =
 Set role flags
 
 Updates the current entity role flags:
-
-  // float TBX_FLAG_ROLE_PLAYER = 8; //
-  // float TBX_FLAG_ROLE_NPC = 32; //
-  // float TBX_FLAG_ROLE_ALL = 40; //
+  float TBX_FLAG_ROLE_PLAYER = 8;
+  float TBX_FLAG_ROLE_NPC = 32;
+  float TBX_FLAG_ROLE_ALL = 40;
 
 NOTE: This setter pre-filters the flagset.
 
@@ -2147,11 +2141,10 @@ void(entity targetEntity, float newFlags) tbx_SetRoleFlags =
 Get position flags
 
 Returns the current entity position flags:
-
-  */ float TBX_FLAG_POSITION_WATER = 16; /*
-  */ float TBX_FLAG_POSITION_GROUND = 512; /*
-  */ float TBX_FLAG_POSITION_EDGE = 1024; /*
-  */ float TBX_FLAG_POSITION_ALL = 1552; /*
+  float TBX_FLAG_POSITION_WATER = 16;
+  float TBX_FLAG_POSITION_GROUND = 512;
+  float TBX_FLAG_POSITION_EDGE = 1024;
+  float TBX_FLAG_POSITION_ALL = 1552;
 
 sourceEntity: the entity to read the value from
 -----------------------------------------------
@@ -2168,11 +2161,10 @@ float(entity sourceEntity) tbx_GetPositionFlags =
 Set position flags
 
 Updates the current entity position flags:
-
-  // float TBX_FLAG_POSITION_WATER = 16; //
-  // float TBX_FLAG_POSITION_GROUND = 512; //
-  // float TBX_FLAG_POSITION_EDGE = 1024; //
-  // float TBX_FLAG_POSITION_ALL = 1552; //
+  float TBX_FLAG_POSITION_WATER = 16;
+  float TBX_FLAG_POSITION_GROUND = 512;
+  float TBX_FLAG_POSITION_EDGE = 1024;
+  float TBX_FLAG_POSITION_ALL = 1552;
 
 NOTE: This setter pre-filters the flagset.
 
@@ -2195,10 +2187,9 @@ void(entity targetEntity, float newFlags) tbx_SetPositionFlags =
 Get cheat flags
 
 Returns the current entity cheat flags:
-
-  */ float TBX_FLAG_CHEAT_GOD = 64; /*
-  */ float TBX_FLAG_CHEAT_NOTARGET = 128; /*
-  */ float TBX_FLAG_CHEAT_ALL = 192; /*
+  float TBX_FLAG_CHEAT_GOD = 64;
+  float TBX_FLAG_CHEAT_NOTARGET = 128;
+  float TBX_FLAG_CHEAT_ALL = 192;
 
 sourceEntity: the entity to read the value from
 -----------------------------------------------
@@ -2215,10 +2206,9 @@ float(entity sourceEntity) tbx_GetCheatFlags =
 Set cheat flags
 
 Updates the current entity cheat flags:
-
-  // float TBX_FLAG_CHEAT_GOD = 64; //
-  // float TBX_FLAG_CHEAT_NOTARGET = 128; //
-  // float TBX_FLAG_CHEAT_ALL = 192; //
+  float TBX_FLAG_CHEAT_GOD = 64;
+  float TBX_FLAG_CHEAT_NOTARGET = 128;
+  float TBX_FLAG_CHEAT_ALL = 192;
 
 NOTE: This setter pre-filters the flagset.
 
@@ -2241,8 +2231,7 @@ void(entity targetEntity, float newFlags) tbx_SetCheatFlags =
 Get item flags
 
 Returns the current entity item flags:
-
-  */ float TBX_FLAG_ITEM_WIDE = 256; /*
+  float TBX_FLAG_ITEM_WIDE = 256;
 
 sourceEntity: the entity to read the value from
 -----------------------------------------------
@@ -2259,8 +2248,7 @@ float(entity sourceEntity) tbx_GetItemFlags =
 Set item flags
 
 Updates the current entity item flags:
-
-  // float TBX_FLAG_ITEM_WIDE = 256; //
+  float TBX_FLAG_ITEM_WIDE = 256;
 
 NOTE: This setter pre-filters the flagset.
 
@@ -2283,10 +2271,9 @@ void(entity targetEntity, float newFlags) tbx_SetItemFlags =
 Get action flags
 
 Returns the current entity action flags:
-
-  */ float TBX_FLAG_ACTION_WATERJUMP = 2048; /*    Jumping from water at ledge
-  */ float TBX_FLAG_ACTION_JUMPRELEASED = 4096; /* Jump button released
-  */ float TBX_FLAG_ACTION_ALL = 6144; /*
+  float TBX_FLAG_ACTION_WATERJUMP = 2048;    // Jumping from water at ledge
+  float TBX_FLAG_ACTION_JUMPRELEASED = 4096; // Jump button released
+  float TBX_FLAG_ACTION_ALL = 6144;          // Vaulting ledge without jumping
 
 sourceEntity: the entity to read the value from
 ------------------------------------------------------------------------------
@@ -2303,10 +2290,9 @@ float(entity sourceEntity) tbx_GetActionFlags =
 Set action flags
 
 Updates the current entity action flags:
-
-  // float TBX_FLAG_ACTION_WATERJUMP = 2048; //    Jumping from water at ledge
-  // float TBX_FLAG_ACTION_JUMPRELEASED = 4096; // Jump button released
-  // float TBX_FLAG_ACTION_ALL = 6144; //
+  float TBX_FLAG_ACTION_WATERJUMP = 2048;    // Jumping from water at ledge
+  float TBX_FLAG_ACTION_JUMPRELEASED = 4096; // Jump button released
+  float TBX_FLAG_ACTION_ALL = 6144;          // Vaulting ledge without jumping
 
 NOTE: This setter pre-filters the flagset.
 
@@ -2325,30 +2311,29 @@ void(entity targetEntity, float newFlags) tbx_SetActionFlags =
 };
 
 /*
--------------------------------------------------------------------
+----------------------------------------------------------------
 Get shirt color index
 
 Returns the current entity shirt color index:
-
-  */ float TBX_COLORINDEX_WHITE = 0; /*   Grayscale
-  */ float TBX_COLORINDEX_BROWN = 1; /*   Khaki tones
-  */ float TBX_COLORINDEX_SILVER = 2; /*  Light blue, silver key
-  */ float TBX_COLORINDEX_GREEN = 3; /*   Military green
-  */ float TBX_COLORINDEX_RED = 4; /*     Blood red
-  */ float TBX_COLORINDEX_OCKER = 5; /*   Egyptian snot yellow
-  */ float TBX_COLORINDEX_GOLD = 6; /*    Fiery yellow, gold key
-  */ float TBX_COLORINDEX_TAN = 7; /*     Skin tones
-  */ float TBX_COLORINDEX_PURPLE = 8; /*  Pastel pink
-  */ float TBX_COLORINDEX_PINK = 9; /*    Saturated pink
-  */ float TBX_COLORINDEX_BONE = 10; /*   Off-white, pale skin tone
-  */ float TBX_COLORINDEX_TEAL = 11; /*   Greenish-blue
-  */ float TBX_COLORINDEX_YELLOW = 12; /* Pure yellow
-  */ float TBX_COLORINDEX_BLUE = 13; /*   Royal blue
+  float TBX_COLORINDEX_WHITE = 0;   // Grayscale
+  float TBX_COLORINDEX_BROWN = 1;   // Khaki tones
+  float TBX_COLORINDEX_SILVER = 2;  // Light blue, silver key
+  float TBX_COLORINDEX_GREEN = 3;   // Military green
+  float TBX_COLORINDEX_RED = 4;     // Blood red
+  float TBX_COLORINDEX_OCKER = 5;   // Egyptian snot yellow
+  float TBX_COLORINDEX_GOLD = 6;    // Fiery yellow, gold key
+  float TBX_COLORINDEX_TAN = 7;     // Skin tones
+  float TBX_COLORINDEX_PURPLE = 8;  // Pastel pink
+  float TBX_COLORINDEX_PINK = 9;    // Saturated pink
+  float TBX_COLORINDEX_BONE = 10;   // Off-white, pale skin tone
+  float TBX_COLORINDEX_TEAL = 11;   // Greenish-blue
+  float TBX_COLORINDEX_YELLOW = 12; // Pure yellow
+  float TBX_COLORINDEX_BLUE = 13;   // Royal blue
 
 NOTE: Many popular sourceports don't support colors on corpses.
 
 sourceEntity: the entity to read the value from
--------------------------------------------------------------------
+----------------------------------------------------------------
 */
 float(entity sourceEntity) tbx_GetShirtColorIndex =
 {
@@ -2356,31 +2341,30 @@ float(entity sourceEntity) tbx_GetShirtColorIndex =
 };
 
 /*
--------------------------------------------------------------------
+----------------------------------------------------------------
 Set shirt color index
 
 Updates the current entity shirt color index:
-
-  // float TBX_COLORINDEX_WHITE = 0; //   Grayscale
-  // float TBX_COLORINDEX_BROWN = 1; //   Khaki tones
-  // float TBX_COLORINDEX_SILVER = 2; //  Light blue, silver key
-  // float TBX_COLORINDEX_GREEN = 3; //   Military green
-  // float TBX_COLORINDEX_RED = 4; //     Blood red
-  // float TBX_COLORINDEX_OCKER = 5; //   Egyptian snot yellow
-  // float TBX_COLORINDEX_GOLD = 6; //    Fiery yellow, gold key
-  // float TBX_COLORINDEX_TAN = 7; //     Skin tones
-  // float TBX_COLORINDEX_PURPLE = 8; //  Pastel pink
-  // float TBX_COLORINDEX_PINK = 9; //    Saturated pink
-  // float TBX_COLORINDEX_BONE = 10; //   Off-white, pale skin tone
-  // float TBX_COLORINDEX_TEAL = 11; //   Greenish-blue
-  // float TBX_COLORINDEX_YELLOW = 12; // Pure yellow
-  // float TBX_COLORINDEX_BLUE = 13; //   Royal blue
+  float TBX_COLORINDEX_WHITE = 0;   // Grayscale
+  float TBX_COLORINDEX_BROWN = 1;   // Khaki tones
+  float TBX_COLORINDEX_SILVER = 2;  // Light blue, silver key
+  float TBX_COLORINDEX_GREEN = 3;   // Military green
+  float TBX_COLORINDEX_RED = 4;     // Blood red
+  float TBX_COLORINDEX_OCKER = 5;   // Egyptian snot yellow
+  float TBX_COLORINDEX_GOLD = 6;    // Fiery yellow, gold key
+  float TBX_COLORINDEX_TAN = 7;     // Skin tones
+  float TBX_COLORINDEX_PURPLE = 8;  // Pastel pink
+  float TBX_COLORINDEX_PINK = 9;    // Saturated pink
+  float TBX_COLORINDEX_BONE = 10;   // Off-white, pale skin tone
+  float TBX_COLORINDEX_TEAL = 11;   // Greenish-blue
+  float TBX_COLORINDEX_YELLOW = 12; // Pure yellow
+  float TBX_COLORINDEX_BLUE = 13;   // Royal blue
 
 NOTE: Many popular sourceports don't support colors on corpses.
 
 targetEntity: the entity to change the value for
 newColor:     new color
--------------------------------------------------------------------
+----------------------------------------------------------------
 */
 void(entity targetEntity, float newColor) tbx_SetShirtColorIndex =
 {
@@ -2392,21 +2376,20 @@ void(entity targetEntity, float newColor) tbx_SetShirtColorIndex =
 Get team color index
 
 Returns the current entity pants/team color index:
-
-  // float TBX_COLORINDEX_WHITE = 0; //   Grayscale
-  // float TBX_COLORINDEX_BROWN = 1; //   Khaki tones
-  // float TBX_COLORINDEX_SILVER = 2; //  Light blue, silver key
-  // float TBX_COLORINDEX_GREEN = 3; //   Military green
-  // float TBX_COLORINDEX_RED = 4; //     Blood red
-  // float TBX_COLORINDEX_OCKER = 5; //   Egyptian snot yellow
-  // float TBX_COLORINDEX_GOLD = 6; //    Fiery yellow, gold key
-  // float TBX_COLORINDEX_TAN = 7; //     Skin tones
-  // float TBX_COLORINDEX_PURPLE = 8; //  Pastel pink
-  // float TBX_COLORINDEX_PINK = 9; //    Saturated pink
-  // float TBX_COLORINDEX_BONE = 10; //   Off-white, pale skin tone
-  // float TBX_COLORINDEX_TEAL = 11; //   Greenish-blue
-  // float TBX_COLORINDEX_YELLOW = 12; // Pure yellow
-  // float TBX_COLORINDEX_BLUE = 13; //   Royal blue
+  float TBX_COLORINDEX_WHITE = 0;   // Grayscale
+  float TBX_COLORINDEX_BROWN = 1;   // Khaki tones
+  float TBX_COLORINDEX_SILVER = 2;  // Light blue, silver key
+  float TBX_COLORINDEX_GREEN = 3;   // Military green
+  float TBX_COLORINDEX_RED = 4;     // Blood red
+  float TBX_COLORINDEX_OCKER = 5;   // Egyptian snot yellow
+  float TBX_COLORINDEX_GOLD = 6;    // Fiery yellow, gold key
+  float TBX_COLORINDEX_TAN = 7;     // Skin tones
+  float TBX_COLORINDEX_PURPLE = 8;  // Pastel pink
+  float TBX_COLORINDEX_PINK = 9;    // Saturated pink
+  float TBX_COLORINDEX_BONE = 10;   // Off-white, pale skin tone
+  float TBX_COLORINDEX_TEAL = 11;   // Greenish-blue
+  float TBX_COLORINDEX_YELLOW = 12; // Pure yellow
+  float TBX_COLORINDEX_BLUE = 13;   // Royal blue
 
 NOTE: Many popular sourceports don't support colors on corpses.
 
@@ -2423,21 +2406,20 @@ float(entity sourceEntity) tbx_GetPantsColorIndex =
 Set team color index
 
 Updates the current entity pants/team color index:
-
-  // float TBX_COLORINDEX_WHITE = 0; //   Grayscale
-  // float TBX_COLORINDEX_BROWN = 1; //   Khaki tones
-  // float TBX_COLORINDEX_SILVER = 2; //  Light blue, silver key
-  // float TBX_COLORINDEX_GREEN = 3; //   Military green
-  // float TBX_COLORINDEX_RED = 4; //     Blood red
-  // float TBX_COLORINDEX_OCKER = 5; //   Egyptian snot yellow
-  // float TBX_COLORINDEX_GOLD = 6; //    Fiery yellow, gold key
-  // float TBX_COLORINDEX_TAN = 7; //     Skin tones
-  // float TBX_COLORINDEX_PURPLE = 8; //  Pastel pink
-  // float TBX_COLORINDEX_PINK = 9; //    Saturated pink
-  // float TBX_COLORINDEX_BONE = 10; //   Off-white, pale skin tone
-  // float TBX_COLORINDEX_TEAL = 11; //   Greenish-blue
-  // float TBX_COLORINDEX_YELLOW = 12; // Pure yellow
-  // float TBX_COLORINDEX_BLUE = 13; //   Royal blue
+  float TBX_COLORINDEX_WHITE = 0;   // Grayscale
+  float TBX_COLORINDEX_BROWN = 1;   // Khaki tones
+  float TBX_COLORINDEX_SILVER = 2;  // Light blue, silver key
+  float TBX_COLORINDEX_GREEN = 3;   // Military green
+  float TBX_COLORINDEX_RED = 4;     // Blood red
+  float TBX_COLORINDEX_OCKER = 5;   // Egyptian snot yellow
+  float TBX_COLORINDEX_GOLD = 6;    // Fiery yellow, gold key
+  float TBX_COLORINDEX_TAN = 7;     // Skin tones
+  float TBX_COLORINDEX_PURPLE = 8;  // Pastel pink
+  float TBX_COLORINDEX_PINK = 9;    // Saturated pink
+  float TBX_COLORINDEX_BONE = 10;   // Off-white, pale skin tone
+  float TBX_COLORINDEX_TEAL = 11;   // Greenish-blue
+  float TBX_COLORINDEX_YELLOW = 12; // Pure yellow
+  float TBX_COLORINDEX_BLUE = 13;   // Royal blue
 
 NOTE: Many popular sourceports don't support colors on corpses.
 
@@ -2515,10 +2497,10 @@ void(entity targetEntity, float newTime) tbx_SetTossEndTime =
 Get armor protection
 
 Returns the current entity armor protection:
-  */ float TBX_ARMORTYPE_NONE = 0; /*
-  */ float TBX_ARMORTYPE_LIGHT = 0.3; /*
-  */ float TBX_ARMORTYPE_STANDARD = 0.6; /*
-  */ float TBX_ARMORTYPE_HEAVY = 0.8; /*
+  float TBX_ARMORTYPE_NONE = 0;
+  float TBX_ARMORTYPE_LIGHT = 0.3;
+  float TBX_ARMORTYPE_STANDARD = 0.6;
+  float TBX_ARMORTYPE_HEAVY = 0.8;
 
 NOTE: Also see STOREDVALUE_ARMORTYPE for carrying between maps.
       Icon state is carried separately in STOREDVALUE_ITEMFLAGS.
@@ -2536,10 +2518,10 @@ float(entity sourceEntity) tbx_GetArmorProtection =
 Set armor protection
 
 Updates the current entity armor protection:
-  // float TBX_ARMORTYPE_NONE = 0; //
-  // float TBX_ARMORTYPE_LIGHT = 0.3; //
-  // float TBX_ARMORTYPE_STANDARD = 0.6; //
-  // float TBX_ARMORTYPE_HEAVY = 0.8; //
+  float TBX_ARMORTYPE_NONE = 0;
+  float TBX_ARMORTYPE_LIGHT = 0.3;
+  float TBX_ARMORTYPE_STANDARD = 0.6;
+  float TBX_ARMORTYPE_HEAVY = 0.8;
 
 NOTE: Also see STOREDVALUE_ARMORTYPE for carrying between maps.
       Icon state is carried separately in STOREDVALUE_ITEMFLAGS.
@@ -2558,10 +2540,10 @@ void(entity targetEntity, float newProtection) tbx_SetArmorProtection =
 Get armor
 
 Returns the current entity armor durability:
-  */ float TBX_ARMOR_NONE = 0; /*
-  */ float TBX_ARMOR_LIGHT = 100; /*
-  */ float TBX_ARMOR_STANDARD = 150; /*
-  */ float TBX_ARMOR_HEAVY = 200; /*
+  float TBX_ARMOR_NONE = 0;
+  float TBX_ARMOR_LIGHT = 100;
+  float TBX_ARMOR_STANDARD = 150;
+  float TBX_ARMOR_HEAVY = 200;
 
 sourceEntity: the entity to read the value from
 -----------------------------------------------
@@ -2576,10 +2558,10 @@ float(entity sourceEntity) tbx_GetArmor =
 Set armor
 
 Updates the current entity armor durability:
-  // float TBX_ARMOR_NONE = 0; //
-  // float TBX_ARMOR_LIGHT = 100; //
-  // float TBX_ARMOR_STANDARD = 150; //
-  // float TBX_ARMOR_HEAVY = 200; //
+  float TBX_ARMOR_NONE = 0;
+  float TBX_ARMOR_LIGHT = 100;
+  float TBX_ARMOR_STANDARD = 150;
+  float TBX_ARMOR_HEAVY = 200;
 
 targetEntity: the entity to change the value for
 newDurability: new armor durability
@@ -2595,12 +2577,12 @@ void(entity targetEntity, float newDurability) tbx_SetArmor =
 Get environment type
 
 Returns the current entity environment pointcontent:
-  // float TBX_POINTCONTENT_EMPTY = -1; // Empty (air)
-  // float TBX_POINTCONTENT_SOLID = -2; // Solid (wall)
-  // float TBX_POINTCONTENT_WATER = -3; // Water (swim)
-  // float TBX_POINTCONTENT_SLIME = -4; // Slime (swim, low damage)
-  // float TBX_POINTCONTENT_LAVA = -5; // Lava (swim, high frequent damage)
-  // float TBX_POINTCONTENT_SKY = -6; // Sky (wall, despawns projectiles)
+  float TBX_POINTCONTENT_EMPTY = -1; // Empty (air)
+  float TBX_POINTCONTENT_SOLID = -2; // Solid (wall)
+  float TBX_POINTCONTENT_WATER = -3; // Water (swim)
+  float TBX_POINTCONTENT_SLIME = -4; // Slime (swim, low damage)
+  float TBX_POINTCONTENT_LAVA = -5;  // Lava (swim, high frequent damage)
+  float TBX_POINTCONTENT_SKY = -6;   // Sky (wall, despawns projectiles)
 
 sourceEntity: the entity to read the value from
 ---------------------------------------------------------------------------
@@ -2615,12 +2597,12 @@ float(entity sourceEntity) tbx_GetEnvironmentType =
 Force environment type
 
 Updates the current entity environment pointcontent for this frame:
-  // float TBX_POINTCONTENT_EMPTY = -1; // Empty (air)
-  // float TBX_POINTCONTENT_SOLID = -2; // Solid (wall)
-  // float TBX_POINTCONTENT_WATER = -3; // Water (swim)
-  // float TBX_POINTCONTENT_SLIME = -4; // Slime (swim, low damage)
-  // float TBX_POINTCONTENT_LAVA = -5; // Lava (swim, high frequent damage)
-  // float TBX_POINTCONTENT_SKY = -6; // Sky (wall, despawns projectiles)
+  float TBX_POINTCONTENT_EMPTY = -1; // Empty (air)
+  float TBX_POINTCONTENT_SOLID = -2; // Solid (wall)
+  float TBX_POINTCONTENT_WATER = -3; // Water (swim)
+  float TBX_POINTCONTENT_SLIME = -4; // Slime (swim, low damage)
+  float TBX_POINTCONTENT_LAVA = -5;  // Lava (swim, high frequent damage)
+  float TBX_POINTCONTENT_SKY = -6;   // Sky (wall, despawns projectiles)
 
 NOTE: Set by engine.
 

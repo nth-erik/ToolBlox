@@ -19,7 +19,7 @@ Please do not change these.
 */
 
 /*
----------------------------------------------------------------------
+--------------------------------------------------------------------
 Trace ray
 
 Casts a collision ray from start point to end point.
@@ -46,12 +46,12 @@ to FALSE. Use tbx_Retrace() to set it to TRUE and trigger.
 startPoint:   source point (defaults to eye position)
 endPoint:     destination point (defaults to enemy eye position)
 monsterCheck:
-  */ float TBX_MONSTERCHECK_HIT = 0; /* hit monsters (default)
-  */ float TBX_MONSTERCHECK_SKIP = 1; /* skip monsters
-  */ float TBX_MONSTERCHECK_HIT_WIDE = 2; /* hit monsters more easily
+  float TBX_MONSTERCHECK_HIT = 0;      // hit monsters (default)
+  float TBX_MONSTERCHECK_SKIP = 1;     // skip monsters
+  float TBX_MONSTERCHECK_HIT_WIDE = 2; // hit monsters more easily
 sourceEntity: entity, its owner and owned entities to ignore
               (defaults to self)
----------------------------------------------------------------------
+--------------------------------------------------------------------
 */
 void(
   vector startPoint,
@@ -117,23 +117,23 @@ void() tbx_Retrace =
 };
 
 /*
---------------------------------------------------------------------
+------------------------------------------------------------------
 Get trace solid flags
 
 Returns an evaluation of the trace crossing solids:
-  */ float TBX_TRACEFLAG_SOLID_ALL = 1; /*
-  */ float TBX_TRACEFLAG_SOLID_START = 2; /*
-  */ float TBX_TRACEFLAG_SOLID_END = 4; /* (experimental)
+  float TBX_TRACEFLAG_SOLID_ALL = 1;
+  float TBX_TRACEFLAG_SOLID_START = 2;
+  float TBX_TRACEFLAG_SOLID_END = 4;   // (experimental)
 
 startPoint:   source point (defaults to eye position)
 endPoint:     destination point (defaults to enemy eye position)
 monsterCheck:
-  // float TBX_MONSTERCHECK_HIT = 0 // hit monsters (default)
-  // float TBX_MONSTERCHECK_SKIP = 1 // skip monsters
-  // float TBX_MONSTERCHECK_HIT_WIDE = 2 // hit monsters more easily
+  float TBX_MONSTERCHECK_HIT = 0;      // hit monsters (default)
+  float TBX_MONSTERCHECK_SKIP = 1;     // skip monsters
+  float TBX_MONSTERCHECK_HIT_WIDE = 2; // hit monsters more easily
 sourceEntity: entity, its owner and owned entities to ignore
               (defaults to self)
---------------------------------------------------------------------
+------------------------------------------------------------------
 */
 float(
   vector startPoint,
@@ -161,7 +161,7 @@ float(
 };
 
 /*
---------------------------------------------------------------------
+-------------------------------------------------------------------
 Get trace distances
 
 Returns an evaluation of distance covered by the trace in a vector:
@@ -172,12 +172,12 @@ Returns an evaluation of distance covered by the trace in a vector:
 startPoint:   source point (defaults to eye position)
 endPoint:     destination point (defaults to enemy eye position)
 monsterCheck:
-  // float TBX_MONSTERCHECK_HIT = 0 // hit monsters (default)
-  // float TBX_MONSTERCHECK_SKIP = 1 // skip monsters
-  // float TBX_MONSTERCHECK_HIT_WIDE = 2 // hit monsters more easily
+  float TBX_MONSTERCHECK_HIT = 0;      // hit monsters (default)
+  float TBX_MONSTERCHECK_SKIP = 1;     // skip monsters
+  float TBX_MONSTERCHECK_HIT_WIDE = 2; // hit monsters more easily
 sourceEntity: entity, its owner and owned entities to ignore
               (defaults to self)
---------------------------------------------------------------------
+-------------------------------------------------------------------
 */
 vector(
   vector startPoint,
@@ -206,9 +206,9 @@ Matches the input end point if the trace completed without collision.
 startPoint:   source point (defaults to eye position)
 endPoint:     destination point (defaults to enemy eye position)
 monsterCheck:
-  // float TBX_MONSTERCHECK_HIT = 0 // hit monsters (default)
-  // float TBX_MONSTERCHECK_SKIP = 1 // skip monsters
-  // float TBX_MONSTERCHECK_HIT_WIDE = 2 // hit monsters more easily
+  float TBX_MONSTERCHECK_HIT = 0;      // hit monsters (default)
+  float TBX_MONSTERCHECK_SKIP = 1;     // skip monsters
+  float TBX_MONSTERCHECK_HIT_WIDE = 2; // hit monsters more easily
 sourceEntity: entity, its owner and owned entities to ignore
               (defaults to self)
 ---------------------------------------------------------------------
@@ -226,7 +226,7 @@ vector(
 };
 
 /*
---------------------------------------------------------------------
+------------------------------------------------------------------
 Get trace collision entity
 
 Returns the entity that the trace hit.
@@ -235,12 +235,12 @@ Returns world if the trace completed without collision.
 startPoint:   source point (defaults to eye position)
 endPoint:     destination point (defaults to enemy eye position)
 monsterCheck:
-  // float TBX_MONSTERCHECK_HIT = 0 // hit monsters (default)
-  // float TBX_MONSTERCHECK_SKIP = 1 // skip monsters
-  // float TBX_MONSTERCHECK_HIT_WIDE = 2 // hit monsters more easily
+  float TBX_MONSTERCHECK_HIT = 0;      // hit monsters (default)
+  float TBX_MONSTERCHECK_SKIP = 1;     // skip monsters
+  float TBX_MONSTERCHECK_HIT_WIDE = 2; // hit monsters more easily
 sourceEntity: entity, its owner and owned entities to ignore
               (defaults to self)
---------------------------------------------------------------------
+------------------------------------------------------------------
 */
 entity(
   vector startPoint,
@@ -255,7 +255,7 @@ entity(
 };
 
 /*
---------------------------------------------------------------------
+------------------------------------------------------------------
 Get trace collision normal
 
 Returns the reflection normal vector for the plane the trace hit.
@@ -263,12 +263,12 @@ Returns the reflection normal vector for the plane the trace hit.
 startPoint:   source point (defaults to eye position)
 endPoint:     destination point (defaults to enemy eye position)
 monsterCheck:
-  // float TBX_MONSTERCHECK_HIT = 0 // hit monsters (default)
-  // float TBX_MONSTERCHECK_SKIP = 1 // skip monsters
-  // float TBX_MONSTERCHECK_HIT_WIDE = 2 // hit monsters more easily
+  float TBX_MONSTERCHECK_HIT = 0;      // hit monsters (default)
+  float TBX_MONSTERCHECK_SKIP = 1;     // skip monsters
+  float TBX_MONSTERCHECK_HIT_WIDE = 2; // hit monsters more easily
 sourceEntity: entity, its owner and owned entities to ignore
               (defaults to self)
---------------------------------------------------------------------
+------------------------------------------------------------------
 */
 vector(
   vector startPoint,
@@ -287,16 +287,16 @@ vector(
 Get trace pass flags
 
 Returns an evaluation of the trace crossing non-solid content volumes:
-  */ float TBX_TRACEFLAG_PASS_AIR = 1; /*
-  */ float TBX_TRACEFLAG_PASS_LIQUID = 2; /*
-  */ float TBX_TRACEFLAG_PASS_MIXED = 3; /* (shorthand for checks)
+  float TBX_TRACEFLAG_PASS_AIR = 1;
+  float TBX_TRACEFLAG_PASS_LIQUID = 2;
+  float TBX_TRACEFLAG_PASS_MIXED = 3;  // (shorthand for checks)
 
 startPoint:   source point (defaults to eye position)
 endPoint:     destination point (defaults to enemy eye position)
 monsterCheck:
-  // float TBX_MONSTERCHECK_HIT = 0 // hit monsters (default)
-  // float TBX_MONSTERCHECK_SKIP = 1 // skip monsters
-  // float TBX_MONSTERCHECK_HIT_WIDE = 2 // hit monsters more easily
+  float TBX_MONSTERCHECK_HIT = 0;      // hit monsters (default)
+  float TBX_MONSTERCHECK_SKIP = 1;     // skip monsters
+  float TBX_MONSTERCHECK_HIT_WIDE = 2; // hit monsters more easily
 sourceEntity: entity, its owner and owned entities to ignore
               (defaults to self)
 ----------------------------------------------------------------------

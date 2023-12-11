@@ -1,40 +1,51 @@
 ../progs.dat
 
-// Immutable
-// id_core/id_engine.txt         // engine API documentation
-id_core/id_engine.qc            // engine API declarations (immutable)
+// Id Software engine hooks (immutable)
 
-// Game
-quake/quake_player.qc           // 
-quake/quake_world.qc            // 
+// id_core/id_engine.txt        // engine API documentation
+id_core/id_engine.qc            // engine API declarations
+
+// ToolBlox Dependencies
+
+tbx_core/tbx_api.qc             // Id Software API hooks
+tbx_core/tbx_signature.qc       // function signatures
+tbx_core/tbx_constant.qc        // constant values
 
 // ToolBlox API
-tbx_core/tbx_api.qc             // API hooks
-tbx_callbacks.qc                // public callbacks
-tbx_core/tbx_debug.qc           // debugging
-tbx_core/tbx_utils.qc           // general utilities
-tbx_core/tbx_sound.qc           // sound management
-tbx_core/tbx_math.qc            // calculations
-tbx_core/tbx_logic.qc           // logical operations
+
 tbx_core/tbx_core.qc            // game-state management
+tbx_core/tbx_debug.qc           // debugging
 tbx_core/tbx_effect.qc          // visual effects
-tbx_core/tbx_string.qc          // text operations
-tbx_core/tbx_flags.qc           // flag-bit operations
 tbx_core/tbx_entity.qc          // entity management
+tbx_core/tbx_flags.qc           // flag-bit operations
 tbx_core/tbx_light.qc           // lighting management
+tbx_core/tbx_logic.qc           // logical operations
+tbx_core/tbx_math.qc            // algebraic operations
 tbx_core/tbx_meta.qc            // ToolBlox metadata
 tbx_core/tbx_model.qc           // model management
 tbx_core/tbx_network.qc         // messaging
 tbx_core/tbx_noise.qc           // iterable noise patterns
 tbx_core/tbx_player.qc          // player management
-tbx_core/tbx_print.qc           // 
-tbx_core/tbx_world.qc           // 
-tbx_core/tbx_vector.qc          // 
-tbx_core/tbx_raytrace.qc        // 
+tbx_core/tbx_print.qc           // player notification texts
+tbx_core/tbx_raytrace.qc        // ray-casting operations
+tbx_core/tbx_sound.qc           // sound management
+tbx_core/tbx_string.qc          // text conversions
+tbx_core/tbx_utils.qc           // general utilities
+tbx_core/tbx_vector.qc          // 3D vector operations
+tbx_core/tbx_world.qc           // map-related operations
 
 // ToolBlox Entities
-tbx_entities/tbx_playerstart.qc // 
-tbx_entities/tbx_worldspawn.qc  // 
 
-// Id Software legacy functions
+tbx_entities/tbx_playerstart.qc // player spawn point
+tbx_entities/tbx_worldspawn.qc  // the map itself
+
+// Id Software legacy API
+
 id_core/id_core.qc              // legacy API functions
+
+// Game mechanics
+quake/quake_player.qc           // 
+quake/quake_world.qc            // 
+
+// Game loop
+tbx_callbacks.qc                // public callbacks

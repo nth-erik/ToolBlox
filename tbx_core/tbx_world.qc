@@ -23,12 +23,12 @@ Please do not change these.
 Point content
 
 Returns content value of the point based on BSP tree:
-  */ float TBX_POINTCONTENT_EMPTY = -1; /* Empty (air)
-  */ float TBX_POINTCONTENT_SOLID = -2; /* Solid (wall)
-  */ float TBX_POINTCONTENT_WATER = -3; /* Water (swim)
-  */ float TBX_POINTCONTENT_SLIME = -4; /* Slime (swim, low damage)
-  */ float TBX_POINTCONTENT_LAVA = -5; /* Lava (swim, high frequent damage)
-  */ float TBX_POINTCONTENT_SKY = -6; /* Sky (wall, despawns projectiles)
+  float TBX_POINTCONTENT_EMPTY = -1; // Empty (air)
+  float TBX_POINTCONTENT_SOLID = -2; // Solid (wall)
+  float TBX_POINTCONTENT_WATER = -3; // Water (swim)
+  float TBX_POINTCONTENT_SLIME = -4; // Slime (swim, low damage)
+  float TBX_POINTCONTENT_LAVA = -5;  // Lava (swim, high frequent damage)
+  float TBX_POINTCONTENT_SKY = -6;   // Sky (wall, despawns projectiles)
 
 sourcePoint: point to check contents of
 ---------------------------------------------------------------------------

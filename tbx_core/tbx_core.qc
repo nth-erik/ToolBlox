@@ -146,7 +146,7 @@ No effect during gameplay.
 filePath: file path to copy to PAK
 -------------------------------------------------------------------
 */
-string(string filePath) tbx_LoadFile= #68;
+string(string filePath) tbx_LoadFile = #68;
 
 /*
 #71 Removed
@@ -209,11 +209,11 @@ Please do not change these.
 Add episode flags
 
 Sets completed episode(s) as TRUE in the server flags:
-  */ float EPISODEFLAG_DOOMED = 1; /* Dimension of the Doomed
-  */ float EPISODEFLAG_BLACK = 2; /* The Realm of Black Magic
-  */ float EPISODEFLAG_NETHER = 4; /* The Netherworld
-  */ float EPISODEFLAG_ELDER = 8; /* The Elder World
-  */ float EPISODEFLAG_ALL = 15; /* All episodes
+  float EPISODEFLAG_DOOMED = 1; // Dimension of the Doomed
+  float EPISODEFLAG_BLACK = 2;  // The Realm of Black Magic
+  float EPISODEFLAG_NETHER = 4; // The Netherworld
+  float EPISODEFLAG_ELDER = 8;  // The Elder World
+  float EPISODEFLAG_ALL = 15;   // All episodes
 
 This function does NOT manage flags other than the original episode runes.
 
@@ -245,11 +245,11 @@ void(float targetEpisodeFlags) tbx_AddEpisodeFlags =
 Remove episode flags
 
 Sets completed episode(s) as FALSE in the server flags:
-  // float EPISODEFLAG_DOOMED = 1; // Dimension of the Doomed
-  // float EPISODEFLAG_BLACK = 2; // The Realm of Black Magic
-  // float EPISODEFLAG_NETHER = 4; // The Netherworld
-  // float EPISODEFLAG_ELDER = 8; // The Elder World
-  // float EPISODEFLAG_ALL = 15; // All episodes
+  float EPISODEFLAG_DOOMED = 1; // Dimension of the Doomed
+  float EPISODEFLAG_BLACK = 2;  // The Realm of Black Magic
+  float EPISODEFLAG_NETHER = 4; // The Netherworld
+  float EPISODEFLAG_ELDER = 8;  // The Elder World
+  float EPISODEFLAG_ALL = 15;   // All episodes
 
 This function does NOT manage flags other than the original episode runes.
 

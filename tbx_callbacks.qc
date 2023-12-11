@@ -29,7 +29,9 @@ Add your mod function here.
 'self' is the current player here.
 ----------------------------------------
 */
-void() tbx_OnBeforePhysics = {};
+void() tbx_OnBeforePhysics = {
+  local vector inputs = tbx_CheckInputs(self);
+};
 
 /*
 ---------------------------------------

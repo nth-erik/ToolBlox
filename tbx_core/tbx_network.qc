@@ -25,24 +25,24 @@ Write network byte
 Writes a network message byte.
 
 networkChannel: reliability channel
-  */ float TBX_NETWORKCHANNEL_BROADCAST = 0; /* unreliable reception
-  */ float TBX_NETWORKCHANNEL_PLAYER = 1; /* reliable client reception
-  */ float TBX_NETWORKCHANNEL_SYNC = 2; /* reliable synchronized reception
-  */ float TBX_NETWORKCHANNEL_INIT = 3; /* initialization string reception
+  float TBX_NETWORKCHANNEL_BROADCAST = 0; // unreliable reception
+  float TBX_NETWORKCHANNEL_PLAYER = 1;    // reliable client reception
+  float TBX_NETWORKCHANNEL_SYNC = 2;      // reliable synchronized reception
+  float TBX_NETWORKCHANNEL_INIT = 3;      // initialization string reception
 
 messageByte:    byte to send, init message with below enums
-  */ float TBX_MESSAGEBYTE_UPDATE_STAT = 3; /* update game stat
-  */ float TBX_MESSAGEBYTE_CAM_VIEWPORT = 5; /* (unused) set camera viewport
-  */ float TBX_MESSAGEBYTE_CAM_ANGLES = 10; /* (unused) set camera angles
-  */ float TBX_MESSAGEBYTE_TEMP_ENTITY = 23; /* start of temporary entity
-  */ float TBX_MESSAGEBYTE_MONSTER_KILLED = 27; /* +1 monster killed
-  */ float TBX_MESSAGEBYTE_SECRET_FOUND = 28; /* +1 secret found
-  */ float TBX_MESSAGEBYTE_INTERMISSION_START = 30; /* show intermission
-  */ float TBX_MESSAGEBYTE_EPILOGUE_START = 31; /* show episode end paragraph
-  */ float TBX_MESSAGEBYTE_CHANGE_MUSIC = 32; /* change CD track
-  */ float TBX_MESSAGEBYTE_SELL_SCREEN = 33; /* enter shill mode
-  */ float TBX_MESSAGEBYTE_CUTSCENE_START = 34; /* (unused) start cutscene
-  */ float TBX_MESSAGEBYTE_UPDATE_ENTITY = 128; /* (unused) updates entity
+  float TBX_MESSAGEBYTE_UPDATE_STAT = 3;         // update game stat
+  float TBX_MESSAGEBYTE_CAM_VIEWPORT = 5;        // (unused) set cam viewport
+  float TBX_MESSAGEBYTE_CAM_ANGLES = 10;         // (unused) set camera angles
+  float TBX_MESSAGEBYTE_TEMP_ENTITY = 23;        // start of temporary entity
+  float TBX_MESSAGEBYTE_MONSTER_KILLED = 27;     // +1 monster killed
+  float TBX_MESSAGEBYTE_SECRET_FOUND = 28;       // +1 secret found
+  float TBX_MESSAGEBYTE_INTERMISSION_START = 30; // show intermission
+  float TBX_MESSAGEBYTE_EPILOGUE_START = 31;     // show episode end paragraph
+  float TBX_MESSAGEBYTE_CHANGE_MUSIC = 32;       // change CD track
+  float TBX_MESSAGEBYTE_SELL_SCREEN = 33;        // enter shill mode
+  float TBX_MESSAGEBYTE_CUTSCENE_START = 34;     // (unused) start cutscene
+  float TBX_MESSAGEBYTE_UPDATE_ENTITY = 128;     // (unused) updates entity
 -----------------------------------------------------------------------------
 */
 void(float networkChannel, float messageByte) tbx_WriteNetworkByte = #52;
