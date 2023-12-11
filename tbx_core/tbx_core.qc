@@ -429,46 +429,6 @@ void() tbx_LoadMain =
 
 
 /*
-================================================
-ToolBlox callbacks
-
-Do not change these here.
-Assign your overrides in your mod files instead.
-
-Example:
-  tbx_OnSomeCallback = myMod_OnSomeCallback;
-================================================
-*/
-
-/*
-------------------------------------------------------------------
-On first frame start
-
-Callback to execute on the first frame, right after the map loads.
-Defaults to doing nothing.
-------------------------------------------------------------------
-*/
-void() tbx_OnFirstFrameStart =
-{
-  tbx_DoNothing();
-};
-
-/*
------------------------------------
-On frame start
-
-Callback to execute on every frame.
-Defaults to doing nothing.
------------------------------------
-*/
-void() tbx_OnFrameStart =
-{
-  tbx_DoNothing();
-};
-
-
-
-/*
 =============================================================
 Global lifecycle functions
 

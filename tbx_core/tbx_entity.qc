@@ -344,6 +344,10 @@ Returns the southwest bottom corner point of the entity relative to world
 coordinates.
 Use tbx_SetBounds() to update.
 
+Human-sized:
+  */ vector TBX_SMALL_BOUNDS_MIN = '-16 -16 -24'; /*
+  */ vector TBX_SMALL_BOUNDS_MAX = '16 16 32'; /*
+
 sourceEntity: the entity to read the value from
 -------------------------------------------------------------------------
 */
@@ -1736,7 +1740,8 @@ vector(entity sourceEntity) tbx_GetEyePosition =
 Set eye position
 
 Updates the current entity eye position relative to its origin.
-Used as camera position for players.
+Used as camera position for players:
+  */ vector TBX_PLAYER_EYE_POSITION = '0 0 22'; /*
 
 targetEntity: the entity to change the value for
 newPosition:  eye position to set
@@ -2640,11 +2645,3 @@ Please do not change these.
 ==================================================
 */
 
-/*
-------------------------------------------------
-InitMarker
-
-Initializes as a non-functional position marker.
-------------------------------------------------
-*/
-void() tbx_InitMarker = {};

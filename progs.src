@@ -1,100 +1,40 @@
 ../progs.dat
 
-//id_core/id_engine.txt         // engine API documentation
+// Immutable
+// id_core/id_engine.txt         // engine API documentation
 id_core/id_engine.qc            // engine API declarations (immutable)
 
+// Game
+quake/quake_player.qc           // 
+quake/quake_world.qc            // 
+
 // ToolBlox API
-tbx_core/tbx_api.qc             // 
-tbx_core/tbx_debug.qc           // 
-tbx_core/tbx_utils.qc           // 
-tbx_core/tbx_sound.qc           // 
-tbx_core/tbx_math.qc            // 
-tbx_core/tbx_logic.qc           // 
-tbx_core/tbx_core.qc            // 
-tbx_core/tbx_effect.qc          // 
-tbx_core/tbx_string.qc          // 
-tbx_core/tbx_flags.qc           // 
-tbx_core/tbx_entity.qc          // 
-tbx_core/tbx_light.qc           // 
-tbx_core/tbx_meta.qc            // 
-tbx_core/tbx_model.qc           // 
-tbx_core/tbx_network.qc         // 
+tbx_core/tbx_api.qc             // API hooks
+tbx_callbacks.qc                // public callbacks
+tbx_core/tbx_debug.qc           // debugging
+tbx_core/tbx_utils.qc           // general utilities
+tbx_core/tbx_sound.qc           // sound management
+tbx_core/tbx_math.qc            // calculations
+tbx_core/tbx_logic.qc           // logical operations
+tbx_core/tbx_core.qc            // game-state management
+tbx_core/tbx_effect.qc          // visual effects
+tbx_core/tbx_string.qc          // text operations
+tbx_core/tbx_flags.qc           // flag-bit operations
+tbx_core/tbx_entity.qc          // entity management
+tbx_core/tbx_light.qc           // lighting management
+tbx_core/tbx_meta.qc            // ToolBlox metadata
+tbx_core/tbx_model.qc           // model management
+tbx_core/tbx_network.qc         // messaging
 tbx_core/tbx_noise.qc           // iterable noise patterns
-tbx_entities/tbx_playerstart.qc // 
-tbx_core/tbx_player.qc          // 
+tbx_core/tbx_player.qc          // player management
 tbx_core/tbx_print.qc           // 
 tbx_core/tbx_world.qc           // 
 tbx_core/tbx_vector.qc          // 
 tbx_core/tbx_raytrace.qc        // 
 
-// Game
-
-// World entity (define everything else beforehand)
+// ToolBlox Entities
+tbx_entities/tbx_playerstart.qc // 
 tbx_entities/tbx_worldspawn.qc  // 
 
+// Id Software legacy functions
 id_core/id_core.qc              // legacy API functions
-// id_core/const.qc // legacy constants
-// id_core/defs_mod.qc // editable declarations
-// id_core/math.qc // Code by Joshua Skelton
-// id_core/debug.qc // advanced debug functions
-// id_core/newflags.qc //new spawnflags for all entities
-// id_core/subs.qc //modified targets, triggers and killtargets
-// monster/fight.qc
-// monster/customsounds.qc //mapper-settable custom sound effects for monsters - iw
-// monster/custom_mdls.qc //mapper-settable custom models for monsters - iw
-// monster/ai.qc
-// hazard/combat.qc
-// item/keydata.qc //functions which deal with key item bitflags and names
-// item/items.qc
-// misc/weapons.qc
-// id_core/world.qc
-// player/client.qc
-// decorative/cutscene.qc //  Drake version -- dumptruck_ds
-// player/player.qc
-// player/prop_plr.qc
-// monster/monsters.qc //modified by dumptruck_ds from Preach's spawning tutorial | fish count fixed
-// misc/keylock.qc //common code for entities which can be unlocked with keys
-// func/doors.qc
-// func/buttons.qc
-// trigger/triggers.qc //added trigger_push_custom based on Hipnotic
-// func/plats.qc
-// hazard/hazards.qc // fireballs, exploboxes and shooters
-// decorative/sprites.qc // decorative sprite effects like bubbles
-// func/func.qc // basic brush entities
-// decorative/sounds.qc // sound effects like ambients and thunders
-// misc/misc.qc
-// decorative/lights.qc //c0burn's excellent switchable lights
-
-// monster/ogre.qc
-// monster/demon.qc
-// monster/shambler.qc
-// monster/knight.qc
-// monster/soldier.qc
-// monster/wizard.qc
-// monster/dog.qc
-// monster/zombie.qc //modified version of Ace_Dave's zombies from Rubicon2 source
-// monster/boss.qc
-// monster/boss2.qc // killable Chthon
-
-// monster/tarbaby.qc		// registered
-// monster/hknight.qc		// registered
-// monster/fish.qc			// registered
-// monster/shalrath.qc		// registered
-// monster/enforcer.qc		// registered
-// monster/oldone.qc		// registered
-// monster/oldone2.qc		// killable Shub
-
-// decorative/dtmisc.qc // sound code from Hipnotic & Rubicon Rumble and misc visual effects
-// decorative/misc_model.qc // Code by Joshua Skelton
-// trigger/hipcount.qc //Hipnotic counter
-// func/hippart.qc //Hipnotic particlefield and func_togglewall
-// trigger/hiptrig.qc //Hipnotic triggers qc
-// hazard/doelightning.qc //from DOE lightnin.qc
-// func/doeplats.qc //Rogue MP newplats.qc
-// func/elevatr.qc //Rogue elevator code
-// misc/rubicon2.qc //selections from Rubicon2 QC
-// decorative/dtquake.qc //triggerable earthquake from Zer cutscenes
-// func/rotate.qc //from Hipnotic thanks RennyC
-// func/func_bob.qc //RennyC's stand alone version based on Acrcane Dimensions
-// func/func_fall2.qc //Renny's improved version.
-// monster/mobot.qc // Using "bot" creation code for func_monster_spawner

@@ -23,7 +23,6 @@ Please do not change these.
 Get nearby player
 
 Returns a player from the passed entity's PVS (potentially visible set).
-Uses self if the parameter is missing.
 Probably uses map VIS data.
 You can temporarily replace "self" to use this on any entity.
 
@@ -659,8 +658,6 @@ void() ClientConnect =
 Put client in server
 
 Function called by the engine when a client is spawned in the server.
-Call this manually to respawn the player after resetting their stats and
-inventory.
 ------------------------------------------------------------------------
 */
 void() PutClientInServer =
@@ -697,7 +694,7 @@ void() SetNewParms =
 
 /*
 --------------------------------------------------------------
-Set new parameters
+Set level-change parameters
 
 Function called by the engine on level transition.
 This should set carry-over stats and inventory for the player.
@@ -706,4 +703,30 @@ This should set carry-over stats and inventory for the player.
 void() SetChangeParms =
 {
   tbx_OnMapChange();
+};
+
+
+
+/*
+================================================
+ToolBlox player functions
+
+Utility functions to efficiently set up players.
+
+Please do not change these.
+================================================
+*/
+
+entity(entity afterEntity) tbx_FindNextPlayerStart =
+{
+  local entity playerStart = tbx_FindEntity(afterEntity, classname, "tbx_PlayerStart");
+
+  if (playerStart == world) {
+    playerStart = tbx_FindEntity(afterEntity, classname, "tbx_PlayerStart");
+    if (playerStart == world) {
+      tbx_Error("\btbx_PlayerStart\b not found.");
+    }
+  }
+
+  return playerStart;
 };

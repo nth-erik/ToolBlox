@@ -1,16 +1,7 @@
 /*
 ==============================================================================
 
-World entity constructor
-
-Please do not change this.
+[Quake]: World config
 
 ==============================================================================
 */
-
-void() worldspawn =
-{
-  tbx_LoadHardCodedSounds();
-  tbx_LoadHardCodedModels();
-  tbx_OnWorldSpawn();
-};
