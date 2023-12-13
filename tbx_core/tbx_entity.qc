@@ -1738,8 +1738,9 @@ vector(entity sourceEntity) tbx_GetEyePosition =
 Set eye position
 
 Updates the current entity eye position relative to its origin.
-Used as camera position for players:
-  vector TBX_PLAYER_EYE_POSITION = '0 0 22';
+Used as camera position for players.
+E.g.:
+  vector MYMOD_PLAYER_EYEPOSITION = '0 0 22';
 
 targetEntity: the entity to change the value for
 newPosition:  eye position to set
@@ -2144,6 +2145,7 @@ Returns the current entity position flags:
   float TBX_FLAG_POSITION_WATER = 16;
   float TBX_FLAG_POSITION_GROUND = 512;
   float TBX_FLAG_POSITION_EDGE = 1024;
+  float TBX_FLAG_POSITION_ANYGROUND = 1536;
   float TBX_FLAG_POSITION_ALL = 1552;
 
 sourceEntity: the entity to read the value from
@@ -2164,6 +2166,7 @@ Updates the current entity position flags:
   float TBX_FLAG_POSITION_WATER = 16;
   float TBX_FLAG_POSITION_GROUND = 512;
   float TBX_FLAG_POSITION_EDGE = 1024;
+  float TBX_FLAG_POSITION_ANYGROUND = 1536;
   float TBX_FLAG_POSITION_ALL = 1552;
 
 NOTE: This setter pre-filters the flagset.
@@ -2271,11 +2274,13 @@ void(entity targetEntity, float newFlags) tbx_SetItemFlags =
 Get action flags
 
 Returns the current entity action flags:
-  float TBX_FLAG_ACTION_WATERJUMP = 2048;    // Jumping from water at ledge
+  float TBX_FLAG_ACTION_WATEREXIT = 2048;    // Jumping from water at ledge
   float TBX_FLAG_ACTION_JUMPRELEASED = 4096; // Jump button released
   float TBX_FLAG_ACTION_ALL = 6144;          // Vaulting ledge without jumping
 
 sourceEntity: the entity to read the value from
+
+NOTE: TBX_FLAG_ACTION_WATEREXIT is used by the engine to alter physics.
 ------------------------------------------------------------------------------
 */
 float(entity sourceEntity) tbx_GetActionFlags =
@@ -2290,7 +2295,7 @@ float(entity sourceEntity) tbx_GetActionFlags =
 Set action flags
 
 Updates the current entity action flags:
-  float TBX_FLAG_ACTION_WATERJUMP = 2048;    // Jumping from water at ledge
+  float TBX_FLAG_ACTION_WATEREXIT = 2048;    // Jumping from water at ledge
   float TBX_FLAG_ACTION_JUMPRELEASED = 4096; // Jump button released
   float TBX_FLAG_ACTION_ALL = 6144;          // Vaulting ledge without jumping
 
@@ -2539,11 +2544,13 @@ void(entity targetEntity, float newProtection) tbx_SetArmorProtection =
 -----------------------------------------------
 Get armor
 
-Returns the current entity armor durability:
-  float TBX_ARMOR_NONE = 0;
-  float TBX_ARMOR_LIGHT = 100;
-  float TBX_ARMOR_STANDARD = 150;
-  float TBX_ARMOR_HEAVY = 200;
+Returns the current entity armor durability.
+
+E.g.:
+  float MYMOD_ARMOR_NONE = 0;
+  float MYMOD_ARMOR_LIGHT = 100;
+  float MYMOD_ARMOR_STANDARD = 150;
+  float MYMOD_ARMOR_HEAVY = 200;
 
 sourceEntity: the entity to read the value from
 -----------------------------------------------
@@ -2557,11 +2564,13 @@ float(entity sourceEntity) tbx_GetArmor =
 ------------------------------------------------
 Set armor
 
-Updates the current entity armor durability:
-  float TBX_ARMOR_NONE = 0;
-  float TBX_ARMOR_LIGHT = 100;
-  float TBX_ARMOR_STANDARD = 150;
-  float TBX_ARMOR_HEAVY = 200;
+Updates the current entity armor durability.
+
+E.g.:
+  float MYMOD_ARMOR_NONE = 0;
+  float MYMOD_ARMOR_LIGHT = 100;
+  float MYMOD_ARMOR_STANDARD = 150;
+  float MYMOD_ARMOR_HEAVY = 200;
 
 targetEntity: the entity to change the value for
 newDurability: new armor durability
@@ -2570,6 +2579,24 @@ newDurability: new armor durability
 void(entity targetEntity, float newDurability) tbx_SetArmor =
 {
   targetEntity.armorvalue = newDurability;
+};
+
+/*
+------------------------------------------------
+Get liquid level
+
+Returns the current entity submersion in liquid:
+  float TBX_SUBMERSION_DRY = 0;
+  float TBX_SUBMERSION_KNEE = 1;
+  float TBX_SUBMERSION_WAIST = 2;
+  float TBX_SUBMERSION_EYE = 3;
+
+sourceEntity: the entity to read the value from
+------------------------------------------------
+*/
+float(entity sourceEntity) tbx_GetSubmersion =
+{
+  return sourceEntity.waterlevel;
 };
 
 /*

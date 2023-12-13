@@ -128,8 +128,6 @@ float TBX_VITALS_ALIVE = 0; // Functioning
 float TBX_VITALS_DYING = 1; // Dropping dead
 float TBX_VITALS_DEAD = 2;  // Static corpse
 float TBX_VITALS_OUT = 3;   // Ready for respawn
-// Eye positions
-vector TBX_PLAYER_EYE_POSITION = '0 0 22';
 // Movement flags
 float TBX_FLAG_MOVE_FLY = 1;
 float TBX_FLAG_MOVE_SWIM = 2;
@@ -142,6 +140,7 @@ float TBX_FLAG_ROLE_ALL = 40;
 float TBX_FLAG_POSITION_WATER = 16;
 float TBX_FLAG_POSITION_GROUND = 512;
 float TBX_FLAG_POSITION_EDGE = 1024;
+float TBX_FLAG_POSITION_ANYGROUND = 1536;
 float TBX_FLAG_POSITION_ALL = 1552;
 // Cheat flags
 float TBX_FLAG_CHEAT_GOD = 64;
@@ -150,7 +149,7 @@ float TBX_FLAG_CHEAT_ALL = 192;
 // Item flags
 float TBX_FLAG_ITEM_WIDE = 256;
 // Action flags
-float TBX_FLAG_ACTION_WATERJUMP = 2048;    // Jumping from water at ledge
+float TBX_FLAG_ACTION_WATEREXIT = 2048;    // Jumping from water at ledge
 float TBX_FLAG_ACTION_JUMPRELEASED = 4096; // Jump button released
 float TBX_FLAG_ACTION_ALL = 6144;          // Vaulting ledge without jumping
 // Color index
@@ -173,11 +172,11 @@ float TBX_ARMORTYPE_NONE = 0;
 float TBX_ARMORTYPE_LIGHT = 0.3;
 float TBX_ARMORTYPE_STANDARD = 0.6;
 float TBX_ARMORTYPE_HEAVY = 0.8;
-// Armor amount
-float TBX_ARMOR_NONE = 0;
-float TBX_ARMOR_LIGHT = 100;
-float TBX_ARMOR_STANDARD = 150;
-float TBX_ARMOR_HEAVY = 200;
+// Submersion
+float TBX_SUBMERSION_DRY = 0;
+float TBX_SUBMERSION_KNEE = 1;
+float TBX_SUBMERSION_WAIST = 2;
+float TBX_SUBMERSION_EYE = 3;
 
 /*
 ------------

@@ -4,7 +4,7 @@
 
 With a highly factorized feature set and robust patterns based on industry standards, *ToolBlox* aims to establish a streamlined modding experience with a relatively low barrier of entry, and accessible in-code documentation to provide a balanced learning curve even for non-coders in order to free our creativity from the burdens of Quake's 1996 release-time tech debt.
 
-It's important to note that ToolBlox stands on the shoulders of giants, originally deriving from an earlier version (2.0) the phenomenal [progs_dump](https://github.com/progs-dump-dev/progs_dump) mod, and it pays dedicated respect to everyone mentioned in the original codebase.
+It's important to note that ToolBlox stands on the shoulders of giants, originally deriving from an earlier version (2.0) of the phenomenal [progs_dump](https://github.com/progs-dump-dev/progs_dump) mod, and it pays dedicated respect to everyone mentioned in the original codebase.
 
 Key features:
 

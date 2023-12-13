@@ -721,12 +721,21 @@ entity(entity afterEntity) tbx_FindNextPlayerStart =
 {
   local entity playerStart = tbx_FindEntity(afterEntity, classname, "tbx_PlayerStart");
 
-  if (playerStart == world) {
-    playerStart = tbx_FindEntity(afterEntity, classname, "tbx_PlayerStart");
-    if (playerStart == world) {
-      tbx_Error("\btbx_PlayerStart\b not found.");
-    }
-  }
+  if (playerStart != world)
+    return playerStart;
 
+  playerStart = tbx_FindEntity(afterEntity, classname, "tbx_PlayerStart");
+
+  if (playerStart != world)
+    return playerStart;
+
+  tbx_PrintDebug("\btbx_PlayerStart\b not found.\nFalling back to \binfo_player_start\b...\n");
+  playerStart = tbx_FindEntity(afterEntity, classname, "info_player_start");
+
+  if (playerStart != world)
+    return playerStart;
+
+  tbx_PrintDebug("\binfo_player_start\b not found.\n");
+  tbx_Error("No player spawn point found.");
   return playerStart;
 };

@@ -290,6 +290,8 @@ float(float rawValue) tbx_GetAbsolute;
 float(float rawValue) tbx_GetSign;
 float(float value1, float value2) tbx_GetAverage;
 float(float value1, float value2, float weight) tbx_GetWeightedAverage;
+float(float value1, float value2) tbx_GetMaximum;
+float(float value1, float value2) tbx_GetMinimum;
 
 /*
 -----------

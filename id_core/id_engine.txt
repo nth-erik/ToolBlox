@@ -957,11 +957,12 @@ Can be used for damage AI-based effects
 Entity spawn parent (usually projectile)
 ----------------------------------------
 
--------------------------------
+--------------------------------------
 .vector movedir
 
 Entity direction of motion/open
--------------------------------
+Used by the engine for waterjump toss.
+--------------------------------------
 
 ----------------------------------------------
 .string message

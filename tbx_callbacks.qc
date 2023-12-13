@@ -31,6 +31,31 @@ Add your mod function here.
 */
 void() tbx_OnBeforePhysics = {
   local vector inputs = tbx_CheckInputs(self);
+
+  if (inputs_z) {
+    quake_HandlePlayerJump();
+    quake_HandlePlayerSwim();
+    quake_HandlePlayerLedgeGrab();
+    tbx_SetActionFlags
+    (
+      self,
+      tbx_RemoveFlags
+      (
+        tbx_GetActionFlags(self),
+        TBX_FLAG_ACTION_JUMPRELEASED
+      )
+    );
+  } else {
+    tbx_SetActionFlags
+    (
+      self,
+      tbx_AddFlags
+      (
+        tbx_GetActionFlags(self),
+        TBX_FLAG_ACTION_JUMPRELEASED
+      )
+    );
+  }
 };
 
 /*

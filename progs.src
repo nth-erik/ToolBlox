@@ -34,6 +34,10 @@ tbx_core/tbx_utils.qc           // general utilities
 tbx_core/tbx_vector.qc          // 3D vector operations
 tbx_core/tbx_world.qc           // map-related operations
 
+// Id Software fallback Entities
+
+id_entities/id_playerstart.qc   // player spawn point
+
 // ToolBlox Entities
 
 tbx_entities/tbx_playerstart.qc // player spawn point
@@ -43,9 +47,14 @@ tbx_entities/tbx_worldspawn.qc  // the map itself
 
 id_core/id_core.qc              // legacy API functions
 
+// ---------------------------------------------------------------------------
+
+// Mod dependencies
+quake_core/quake_constant.qc      // constant values
+
 // Game mechanics
-quake/quake_player.qc           // 
-quake/quake_world.qc            // 
+quake_core/quake_player.qc           // player management
+quake_core/quake_world.qc            // map-related operations
 
 // Game loop
 tbx_callbacks.qc                // public callbacks

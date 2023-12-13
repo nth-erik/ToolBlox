@@ -130,3 +130,39 @@ float(float value1, float value2, float weight) tbx_GetWeightedAverage =
 {
   return (value1 * weight + value2 * (1 - weight)) / 2;
 };
+
+/*
+----------------------------------------
+Get maximum float
+
+Returns the higher of the passed floats.
+
+value1: first float
+value2: second float
+----------------------------------------
+*/
+float(float value1, float value2) tbx_GetMaximum =
+{
+  if (value1 < value2)
+    return value2;
+
+  return value1;
+};
+
+/*
+---------------------------------------
+Get minimum float
+
+Returns the lower of the passed floats.
+
+value1: first float
+value2: second float
+---------------------------------------
+*/
+float(float value1, float value2) tbx_GetMinimum =
+{
+  if (value1 > value2)
+    return value2;
+
+  return value1;
+};
