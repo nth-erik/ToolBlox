@@ -1,5 +1,15 @@
 # ToolBlox Changelog
 
+0.1.6
+
+- Update README
+- Update CHANGELOG
+
+0.1.5
+
+- Add movement logic
+- Add limited info_player_start support
+
 0.1.4
 
 - Add CHANGELOG

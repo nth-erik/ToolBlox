@@ -27,6 +27,6 @@ Key features:
 5. Run Quake with `-game <your-mod-folder>` argument, or select your mod from the in-game menu, if your [source port](https://www.slipseer.com/index.php?threads/quake-engines-source-ports-a-beginners-guide.11/) supports that (for reasonable backwards compatibility, QuakeSpasm or FTE are advisable)
 6. Open your favorite IDE or code editor for Quake C – e.g. [Visual Studio Code](https://code.visualstudio.com/) or [FTEQCCGUI](https://www.fteqcc.org/)
 7. Take a look at `tbx_callbacks.qc` and explore the folder structure
-8. ~~Get the official *ToolBlox Quake* mod~~
+8. ~~Get the official *ToolBlox Quake* map pack~~
 9. ~~Start a new game~~
-10. Wait patiently for an official ToolBlox Quake mod :sweat_smile:
+10. Wait patiently for an official ToolBlox Quake map pack :sweat_smile:

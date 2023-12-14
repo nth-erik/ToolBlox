@@ -50,11 +50,11 @@ id_core/id_core.qc              // legacy API functions
 // ---------------------------------------------------------------------------
 
 // Mod dependencies
-quake_core/quake_constant.qc      // constant values
+quake_core/quake_constant.qc    // constant values
 
 // Game mechanics
-quake_core/quake_player.qc           // player management
-quake_core/quake_world.qc            // map-related operations
+quake_core/quake_player.qc      // player management
+quake_core/quake_world.qc       // map-related operations
 
 // Game loop
 tbx_callbacks.qc                // public callbacks
