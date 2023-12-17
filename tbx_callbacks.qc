@@ -32,6 +32,7 @@ Add your mod function here.
 void() tbx_OnBeforePhysics = {
   local vector inputs = tbx_CheckInputs(self);
 
+  // jump controls
   if (inputs_z) {
     quake_HandlePlayerJump();
     quake_HandlePlayerSwim();
@@ -45,17 +46,20 @@ void() tbx_OnBeforePhysics = {
         TBX_FLAG_ACTION_JUMPRELEASED
       )
     );
-  } else {
-    tbx_SetActionFlags
-    (
-      self,
-      tbx_AddFlags
-      (
-        tbx_GetActionFlags(self),
-        TBX_FLAG_ACTION_JUMPRELEASED
-      )
-    );
+
+    return;
   }
+
+  // not jumping, reset flag
+  tbx_SetActionFlags
+  (
+    self,
+    tbx_AddFlags
+    (
+      tbx_GetActionFlags(self),
+      TBX_FLAG_ACTION_JUMPRELEASED
+    )
+  );
 };
 
 /*
@@ -67,7 +71,10 @@ Add your mod function here.
 'self' is the current player here.
 ---------------------------------------
 */
-void() tbx_OnAfterPhysics = {};
+void() tbx_OnAfterPhysics = {
+  quake_HandleFall(self);
+  quake_SetOldVelocity(self);
+};
 
 /*
 -------------------------------------------------------

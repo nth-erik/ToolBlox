@@ -1,4 +1,9 @@
 # ToolBlox Changelog
+0.1.7
+
+- Add fall damage logic
+- Add break-fall logic into ledge grab
+- Refactor quake_player into quake_player_move and quake_player_spawn
 
 0.1.6
 
