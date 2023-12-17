@@ -1,4 +1,9 @@
 # ToolBlox Changelog
+
+0.1.8
+
+- Add fall damage for water
+
 0.1.7
 
 - Add fall damage logic

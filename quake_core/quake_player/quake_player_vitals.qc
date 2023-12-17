@@ -16,10 +16,14 @@ Applies damage over a certain drop speed.
 void(entity targetEntity, float damage) quake_LoseHealth =
 {
   // Pentagram prevents life loss
-  if (tbx_GetItemFlags(self) & TBX_ITEMFLAG_PENTAGRAM)
+  if (tbx_GetItemFlags(targetEntity) & TBX_ITEMFLAG_PENTAGRAM || damage < 1)
     return;
 
-  local float health = tbx_GetHealth(self);
+  tbx_PrintDebug("\nHealth damage: ");
+  tbx_PrintDebug(tbx_GetFloatString(damage));
+  tbx_PrintDebug("\n");
+
+  local float health = tbx_GetHealth(targetEntity);
   tbx_AddHealth(targetEntity, -damage, health - damage, health);
 };
 
@@ -49,7 +53,8 @@ void(entity targetEntity) quake_HandleFall =
   hitForce =
   (
     hitForce * hitForce * hitForce * hitForce * hitForce *
-    QUAKE_MAXFALLDAMAGE
-  );
-  quake_LoseHealth(self, hitForce);
+    QUAKE_MAXFALLDAMAGE 
+  ) * (1 - tbx_GetSubmersion(targetEntity) / 10);
+
+  quake_LoseHealth(targetEntity, hitForce);
 };
