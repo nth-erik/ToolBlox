@@ -1,5 +1,10 @@
 # ToolBlox Changelog
 
+0.1.9
+
+- Add lava/slime exposure DoT (soaking)
+- Add timer functions
+
 0.1.8
 
 - Add fall damage for water

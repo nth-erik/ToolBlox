@@ -72,8 +72,12 @@ Add your mod function here.
 ---------------------------------------
 */
 void() tbx_OnAfterPhysics = {
+  quake_HandleSoak(self);
   quake_HandleFall(self);
   quake_SetOldVelocity(self);
+  // update global timers
+  quake_SetTick();
+  quake_SetSecond();
 };
 
 /*

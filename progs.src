@@ -51,12 +51,14 @@ id_core/id_core.qc              // legacy API functions
 
 // Mod dependencies
 quake_core/quake_constant.qc                   // constant values
+quake_core/quake_variable.qc                   // variables
 
 // Game mechanics
-quake_core/quake_entity.qc                     // entity management
+quake_core/quake_core.qc                       // game-state management
+quake_core/quake_entity/quake_entity.qc        // entity management
+quake_core/quake_entity/quake_entity_vitals.qc // entity vitals
 quake_core/quake_player/quake_player_move.qc   // player movement
 quake_core/quake_player/quake_player_spawn.qc  // player lifecycle
-quake_core/quake_player/quake_player_vitals.qc // player vitals
 quake_core/quake_world.qc                      // map-related operations
 
 // Game loop
