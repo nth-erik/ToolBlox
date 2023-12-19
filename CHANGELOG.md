@@ -1,5 +1,9 @@
 # ToolBlox Changelog
 
+0.1.10
+
+- Add basic player death state
+
 0.1.9
 
 - Add lava/slime exposure DoT (soaking)

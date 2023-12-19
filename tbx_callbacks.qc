@@ -30,6 +30,14 @@ Add your mod function here.
 ----------------------------------------
 */
 void() tbx_OnBeforePhysics = {
+  if (tbx_GetHealth(self) <= 0)
+  {
+    tbx_SetMoveType(self, TBX_MOVETYPE_DROP);
+    tbx_SetSolidType(self, TBX_SOLIDTYPE_NOT);
+    tbx_SetEyePosition(self, '0 0 0');
+    return;
+  }
+
   local vector inputs = tbx_CheckInputs(self);
 
   // jump controls
