@@ -21,6 +21,7 @@ void() quake_OnPlayerSpawn =
   local entity playerStart = tbx_FindNextPlayerStart(quake_lastPlayerStart);
   local float startMaxHealth = tbx_GetMaxHealth(playerStart);
   local float startHealth = tbx_GetHealth(playerStart);
+  local float startItems = tbx_GetItems(playerStart);
   local float startMinHealth = 25;
 
   if (startMaxHealth == 0)
@@ -31,6 +32,14 @@ void() quake_OnPlayerSpawn =
   if (startHealth == 0)
   {
     startHealth = QUAKE_PLAYER_HEALTH;
+  }
+
+  if (startItems == 0)
+  {
+    startItems =
+    (
+      TBX_ITEMFLAG_SHOTGUN
+    );
   }
 
   tbx_SetMaxHealth(self, startMaxHealth);
@@ -52,6 +61,8 @@ void() quake_OnPlayerSpawn =
   tbx_SetEyePosition(self, QUAKE_PLAYER_EYEPOSITION);
   tbx_ScaleVelocity(self, 0);
   quake_SetOldVelocity(self);
+
+  tbx_SetItems(self, startItems);
 
   quake_lastPlayerStart = playerStart;
 };

@@ -1,5 +1,9 @@
 # ToolBlox Changelog
 
+0.1.11
+
+- Add default shotgun in player spawn (icon only)
+
 0.1.10
 
 - Add basic player death state

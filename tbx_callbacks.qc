@@ -29,7 +29,8 @@ Add your mod function here.
 'self' is the current player here.
 ----------------------------------------
 */
-void() tbx_OnBeforePhysics = {
+void() tbx_OnBeforePhysics =
+{
   if (tbx_GetHealth(self) <= 0)
   {
     tbx_SetMoveType(self, TBX_MOVETYPE_DROP);
@@ -79,7 +80,8 @@ Add your mod function here.
 'self' is the current player here.
 ---------------------------------------
 */
-void() tbx_OnAfterPhysics = {
+void() tbx_OnAfterPhysics =
+{
   quake_HandleSoak(self);
   quake_HandleFall(self);
   quake_SetOldVelocity(self);
@@ -119,8 +121,9 @@ Add your mod function here.
 'self' is the current player here.
 ----------------------------------------------
 */
-void() tbx_OnPlayerSpawn = {
-    quake_OnPlayerSpawn();
+void() tbx_OnPlayerSpawn =
+{
+  quake_OnPlayerSpawn();
 };
 
 /*
