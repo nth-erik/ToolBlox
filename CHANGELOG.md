@@ -1,5 +1,9 @@
 # ToolBlox Changelog
 
+0.1.12
+
+- Add csqc stub
+
 0.1.11
 
 - Add default shotgun in player spawn (icon only)
