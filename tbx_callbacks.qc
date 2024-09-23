@@ -88,6 +88,7 @@ void() tbx_OnAfterPhysics =
   // update global timers
   quake_SetTick();
   quake_SetSecond();
+  quake_Set3Seconds();
 };
 
 /*

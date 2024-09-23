@@ -25,6 +25,7 @@ void(entity targetEntity, float damage) quake_LoseHealth =
 
   local float health = tbx_GetHealth(targetEntity);
   tbx_AddHealth(targetEntity, -damage, health - damage, health);
+  targetEntity.dmg_take = damage;
 };
 
 /*
@@ -105,7 +106,10 @@ void(entity targetEntity) quake_HandleSoakEffect =
 
     if (soakTypes_z == TBX_POINTCONTENT_SLIME)
       damageSum = damageSum + 2.3;
+  }
 
+  if (quake_Get3Seconds())
+  {
     // dry off
     soakTypes_x = soakTypes_y;
     soakTypes_y = soakTypes_z;
@@ -113,7 +117,19 @@ void(entity targetEntity) quake_HandleSoakEffect =
     quake_SetSoakTypes(targetEntity, soakTypes);
   }
 
-  quake_LoseHealth(targetEntity, damageSum);
+  if (damageSum)
+  {
+    // TODO: load and add actual sound
+    tbx_PlaySound
+    (
+      self,
+      TBX_SOUND_CHANNEL_BODY,
+      TBX_SOUND_SPITHIT,
+      damageSum * 0.2,
+      TBX_SOUND_FALLOFF_NORMAL
+    );
+    quake_LoseHealth(targetEntity, damageSum);
+  }
 };
 
 /*

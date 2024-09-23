@@ -122,7 +122,7 @@ string(string s) precache_model =
 
 void(entity client, string s) stuffcmd =
 {
-  tbx_PrintDeprecation("precache_model", "tbx_PrintClientCommand");
+  tbx_PrintDeprecation("stuffcmd", "tbx_PrintClientCommand");
   return _21(client, s);
 };
 

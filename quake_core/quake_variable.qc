@@ -23,6 +23,7 @@ quake_core.qc
 */
 float quake_tick;
 float quake_second;
+float quake_3Seconds;
 
 /*
 ---------------

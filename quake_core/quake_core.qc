@@ -61,3 +61,30 @@ void() quake_SetSecond =
   if (quake_second < time)
     quake_second = time + 1;
 };
+
+/*
+--------------------------------------------
+Check second
+
+Returns if a second has passed.
+Uses // float quake_3Seconds; // internally.
+--------------------------------------------
+*/
+float() quake_Get3Seconds =
+{
+  return quake_3Seconds < time;
+};
+
+/*
+--------------------------------------------
+Set second
+
+Resets second to time + 1 second.
+Uses // float quake_3Seconds; // internally.
+--------------------------------------------
+*/
+void() quake_Set3Seconds =
+{
+  if (quake_3Seconds < time)
+    quake_3Seconds = time + 3;
+};
