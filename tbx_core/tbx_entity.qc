@@ -2311,7 +2311,7 @@ void(entity targetEntity, float newFlags) tbx_SetActionFlags =
   local float actionFlags = newFlags & TBX_FLAG_ACTION_ALL;
 
   targetEntity.flags = (
-    tbx_RemoveFlags(targetEntity.flags, TBX_FLAG_ACTION_ALL) + actionFlags
+    tbx_RemoveFlags(targetEntity.flags, TBX_FLAG_ACTION_ALL) | actionFlags
   );
 };
 

@@ -45,6 +45,7 @@ quake_player_spawn.qc
 //init
 float QUAKE_PLAYER_HEALTH = 100;
 float QUAKE_PLAYER_MAXHEALTH = 250;
+float QUAKE_PLAYER_MINHEALTH = 25;
 
 /*
 --------------------
@@ -56,6 +57,7 @@ vector QUAKE_PLAYER_JUMPVELOCITY = '0 0 270';
 vector QUAKE_PLAYER_EMERGEVELOCITY = '0 0 189';
 vector QUAKE_PLAYER_WAISTPOSITION = '0 0 8';
 float QUAKE_LEDGE_DISTANCE = 24;
+float QUAKE_FLAG_ACTION_LEDGEGRAB = 2048;
 
 /*
 ----------------------

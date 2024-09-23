@@ -25,6 +25,14 @@ void() quake_HandlePlayerJump =
 
   // can jump (also underwater!)
   tbx_AddVelocity(self, QUAKE_PLAYER_JUMPVELOCITY);
+  // TODO: load and add actual sound
+  tbx_PlaySound(
+    self,
+    TBX_SOUND_CHANNEL_VOICE,
+    TBX_SOUND_SPARKHIT,
+    1,
+    TBX_SOUND_FALLOFF_NORMAL
+  );
 };
 
 /*
@@ -52,6 +60,51 @@ void() quake_HandlePlayerSwim =
     velocity_z = 0;
     tbx_SetVelocity(self, velocity + QUAKE_PLAYER_EMERGEVELOCITY);
   }
+};
+
+/*
+------------------------------------------
+Grab ledge
+
+Sets the QUAKE_FLAG_ACTION_LEDGEGRAB flag.
+------------------------------------------
+*/
+void() quake_GrabLedge =
+{
+  quake_SetActionFlags
+  (
+    self,
+    tbx_AddFlags(quake_GetActionFlags(self), QUAKE_FLAG_ACTION_LEDGEGRAB)
+  );
+  // TODO: load and add actual sound
+  tbx_PlaySound
+  (
+    self,
+    TBX_SOUND_CHANNEL_VOICE,
+    TBX_SOUND_SPARKHIT,
+    0.5,
+    TBX_SOUND_FALLOFF_NORMAL
+  );
+};
+
+/*
+--------------------------------------------
+Release ledge
+
+Unsets the QUAKE_FLAG_ACTION_LEDGEGRAB flag.
+--------------------------------------------
+*/
+void() quake_ReleaseLedge =
+{
+  quake_SetActionFlags
+  (
+    self,
+    tbx_RemoveFlags
+    (
+      quake_GetActionFlags(self),
+      QUAKE_FLAG_ACTION_LEDGEGRAB
+    )
+  );
 };
 
 /*
@@ -96,7 +149,10 @@ void() quake_HandlePlayerLedgeGrab =
 
   // no wall
   if (distanceData_x == 1)
+  {
+    quake_ReleaseLedge();
     return;
+  }
 
   // eye level check
   start = eye;
@@ -112,10 +168,22 @@ void() quake_HandlePlayerLedgeGrab =
 
   // no ledge
   if (distanceData_x < 1)
+  {
+    quake_ReleaseLedge();
     return;
+  }
+
+  // ledge is available
+
+  // play sound when finding ledge
+  if (!(quake_GetActionFlags(self) & QUAKE_FLAG_ACTION_LEDGEGRAB))
+  {
+    quake_GrabLedge();
+  }
 
   // dropping, break fall first
-  if (velocity_z < 0) {
+  if (velocity_z < 0)
+  {
     tbx_AddVelocity
     (
       self,

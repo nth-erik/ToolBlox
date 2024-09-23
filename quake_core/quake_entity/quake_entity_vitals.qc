@@ -57,6 +57,15 @@ void(entity targetEntity) quake_HandleFall =
   ) * (1 - tbx_GetSubmersion(targetEntity) / 10);
 
   quake_LoseHealth(targetEntity, hitForce);
+  // thud volume determined by impact force
+  tbx_PlaySound
+  (
+    self,
+    TBX_SOUND_CHANNEL_BODY,
+    TBX_SOUND_DROPTHUD,
+    tbx_GetMinimum(hitForce * 0.1, 1),
+    TBX_SOUND_FALLOFF_NORMAL
+  );
 };
 
 /*
@@ -108,11 +117,11 @@ void(entity targetEntity) quake_HandleSoakEffect =
 };
 
 /*
---------------------------------------------
+---------------------------------------------
 Handle Soak
 
-Manages aftereffects of exposure to liquids.
---------------------------------------------
+Manages after-effects of exposure to liquids.
+---------------------------------------------
 */
 void(entity targetEntity) quake_HandleSoak =
 {

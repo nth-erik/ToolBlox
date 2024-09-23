@@ -1,5 +1,9 @@
 # ToolBlox Changelog
 
+0.1.13
+
+- Add placeholder sounds to jump, drop, ledge grab
+
 0.1.12
 
 - Add csqc stub

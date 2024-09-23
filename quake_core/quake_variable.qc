@@ -30,4 +30,5 @@ quake_entity.qc
 ---------------
 */
 .vector quake_oldVelocity;
-.vector soakTypes;
+.vector quake_soakTypes;
+.float quake_flags;
