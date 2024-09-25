@@ -2582,6 +2582,38 @@ void(entity targetEntity, float newDurability) tbx_SetArmor =
 };
 
 /*
+---------------------------------------------------
+Add armor
+
+Adjusts the current entity armor by passed value.
+Value is clamped between given minimum and maximum.
+Armor is rounded to higher integer.
+
+targetEntity:  the entity to change the value for
+addHealth:     armor to add (can be negative)
+minimumHealth: low cap
+maximumHealth: high cap
+---------------------------------------------------
+*/
+void(
+  entity targetEntity,
+  float addArmor,
+  float minimumArmor,
+  float maximumArmor
+) tbx_AddArmor =
+{
+  float newArmor = targetEntity.armorvalue + addArmor;
+
+  if (newArmor < minimumArmor)
+    newArmor = minimumArmor;
+
+  if (newArmor > maximumArmor)
+    newArmor = maximumArmor;
+
+  targetEntity.armorvalue = tbx_GetCeiling(newArmor);
+};
+
+/*
 ------------------------------------------------
 Get liquid level
 

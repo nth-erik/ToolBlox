@@ -7,11 +7,11 @@
 */
 
 /*
------------------------------------------
+---------------
 Lose health
 
-Applies damage over a certain drop speed.
------------------------------------------
+Applies damage.
+---------------
 */
 void(entity targetEntity, float damage) quake_LoseHealth =
 {
@@ -26,6 +26,38 @@ void(entity targetEntity, float damage) quake_LoseHealth =
   local float health = tbx_GetHealth(targetEntity);
   tbx_AddHealth(targetEntity, -damage, health - damage, health);
   targetEntity.dmg_take = damage;
+};
+
+/*
+--------------------------------
+Lose armor
+
+Applies damage to armor.
+
+Returns remaining health damage.
+--------------------------------
+*/
+float(entity targetEntity, float damage) quake_LoseArmor =
+{
+  local float armor = tbx_GetArmor(targetEntity);
+  float armorDamage = tbx_GetCeiling(
+    tbx_GetMinimum(
+      tbx_GetArmorProtection(targetEntity) * damage,
+      armor
+    )
+  );
+  float healthDamage = damage - armorDamage;
+
+  tbx_PrintDebug("\nArmor damage: ");
+  tbx_PrintDebug(tbx_GetFloatString(armorDamage));
+  tbx_PrintDebug(", remainder: ");
+  tbx_PrintDebug(tbx_GetFloatString(healthDamage));
+  tbx_PrintDebug("\n");
+
+  tbx_AddArmor(targetEntity, -armorDamage, armor - armorDamage, armor);
+  tbx_PrintClientCommand(targetEntity, "bf\n");
+
+  return healthDamage;
 };
 
 /*
@@ -128,7 +160,10 @@ void(entity targetEntity) quake_HandleSoakEffect =
       damageSum * 0.2,
       TBX_SOUND_FALLOFF_NORMAL
     );
-    quake_LoseHealth(targetEntity, damageSum);
+    quake_LoseHealth(
+      targetEntity,
+      quake_LoseArmor(targetEntity, damageSum)
+    );
   }
 };
 

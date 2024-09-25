@@ -33,14 +33,6 @@ void() quake_OnPlayerSpawn =
     startHealth = QUAKE_PLAYER_HEALTH;
   }
 
-  if (startItems == 0)
-  {
-    startItems =
-    (
-      TBX_ITEMFLAG_SHOTGUN
-    );
-  }
-
   tbx_SetMaxHealth(self, startMaxHealth);
   tbx_SetHealth(self, startHealth, QUAKE_PLAYER_MINHEALTH, startMaxHealth);
   tbx_SetVulnerability(self, TBX_VULNERABILITY_ALL);
