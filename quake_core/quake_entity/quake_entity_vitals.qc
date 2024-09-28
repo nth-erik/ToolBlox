@@ -29,15 +29,15 @@ void(entity targetEntity, float damage) quake_LoseHealth =
 };
 
 /*
---------------------------------
-Lose armor
+------------------------------------------
+Hit armor
 
-Applies damage to armor.
+Applies protection-capped damage to armor.
 
-Returns remaining health damage.
---------------------------------
+Returns unprotected health damage.
+------------------------------------------
 */
-float(entity targetEntity, float damage) quake_LoseArmor =
+float(entity targetEntity, float damage) quake_HitArmor =
 {
   local float armor = tbx_GetArmor(targetEntity);
   float armorDamage = tbx_GetCeiling(
@@ -54,7 +54,40 @@ float(entity targetEntity, float damage) quake_LoseArmor =
   tbx_PrintDebug(tbx_GetFloatString(healthDamage));
   tbx_PrintDebug("\n");
 
-  tbx_AddArmor(targetEntity, -armorDamage, armor - armorDamage, armor);
+  tbx_AddArmor(targetEntity, -armorDamage, 0, armor);
+  tbx_PrintClientCommand(targetEntity, "bf\n");
+
+  return healthDamage;
+};
+
+/*
+------------------------------------------------------
+Melt armor
+
+Applies full damage to armor.
+Use this for environment damage enveloping the player.
+
+Returns unprotected health damage.
+------------------------------------------------------
+*/
+float(entity targetEntity, float damage) quake_MeltArmor =
+{
+  local float armor = tbx_GetArmor(targetEntity);
+  float preventedDamage = tbx_GetCeiling(
+    tbx_GetMinimum(
+      tbx_GetArmorProtection(targetEntity) * damage,
+      armor
+    )
+  );
+  float healthDamage = damage - preventedDamage;
+
+  tbx_PrintDebug("\nArmor damage: ");
+  tbx_PrintDebug(tbx_GetFloatString(damage));
+  tbx_PrintDebug(", health damage: ");
+  tbx_PrintDebug(tbx_GetFloatString(healthDamage));
+  tbx_PrintDebug("\n");
+
+  tbx_AddArmor(targetEntity, -damage, 0, armor);
   tbx_PrintClientCommand(targetEntity, "bf\n");
 
   return healthDamage;
@@ -162,7 +195,7 @@ void(entity targetEntity) quake_HandleSoakEffect =
     );
     quake_LoseHealth(
       targetEntity,
-      quake_LoseArmor(targetEntity, damageSum)
+      quake_MeltArmor(targetEntity, damageSum)
     );
   }
 };
