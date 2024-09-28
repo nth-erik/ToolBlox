@@ -179,7 +179,24 @@ Callback to run as the world spawns.
 Add your mod function here.
 ------------------------------------
 */
-void() tbx_OnWorldSpawn = {};
+void() tbx_OnWorldSpawn = {
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_UGH);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_FRACTURE);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_HUH);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_PAIN1);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_PAIN2);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_PAIN3);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_PAIN4);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_PAIN5);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_PAIN6);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_SLIMEBURN);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_SCREAM1);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_SCREAM2);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_GULP1);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_GULP2);
+  tbx_LoadSound(QUAKE_SOUND_FOLEY_LEDGEGRAB);
+  tbx_LoadSound(QUAKE_SOUND_FOLEY_LEDGESLIP);
+};
 
 /*
 ------------------------------------------------------------------

@@ -25,11 +25,10 @@ void() quake_HandlePlayerJump =
 
   // can jump (also underwater!)
   tbx_AddVelocity(self, QUAKE_PLAYER_JUMPVELOCITY);
-  // TODO: load and add actual sound
   tbx_PlaySound(
     self,
     TBX_SOUND_CHANNEL_VOICE,
-    TBX_SOUND_SPARKHIT,
+    QUAKE_SOUND_PLAYER_HUH,
     1,
     TBX_SOUND_FALLOFF_NORMAL
   );
@@ -67,24 +66,31 @@ void() quake_HandlePlayerSwim =
 Grab ledge
 
 Sets the QUAKE_FLAG_ACTION_LEDGEGRAB flag.
+Plays grab sound.
+
+soundFile: sound to play when grabbing
 ------------------------------------------
 */
-void() quake_GrabLedge =
+void(string soundFile) quake_GrabLedge =
 {
+  if (quake_GetActionFlags(self) & QUAKE_FLAG_ACTION_LEDGEGRAB)
+    return;
+
+  tbx_PlaySound
+  (
+    self,
+    TBX_SOUND_CHANNEL_BODY,
+    soundFile,
+    1,
+    TBX_SOUND_FALLOFF_NORMAL
+  );
   quake_SetActionFlags
   (
     self,
     tbx_AddFlags(quake_GetActionFlags(self), QUAKE_FLAG_ACTION_LEDGEGRAB)
   );
-  // TODO: load and add actual sound
-  tbx_PlaySound
-  (
-    self,
-    TBX_SOUND_CHANNEL_VOICE,
-    TBX_SOUND_SPARKHIT,
-    0.5,
-    TBX_SOUND_FALLOFF_NORMAL
-  );
+  tbx_PrintDebug(soundFile);
+  tbx_PrintDebug(" grabbing\n");
 };
 
 /*
@@ -96,6 +102,9 @@ Unsets the QUAKE_FLAG_ACTION_LEDGEGRAB flag.
 */
 void() quake_ReleaseLedge =
 {
+  if (!(quake_GetActionFlags(self) & QUAKE_FLAG_ACTION_LEDGEGRAB))
+    return;
+
   quake_SetActionFlags
   (
     self,
@@ -105,6 +114,7 @@ void() quake_ReleaseLedge =
       QUAKE_FLAG_ACTION_LEDGEGRAB
     )
   );
+  tbx_PrintDebug("releasing\n");
 };
 
 /*
@@ -174,21 +184,18 @@ void() quake_HandlePlayerLedgeGrab =
   }
 
   // ledge is available
-
-  // play sound when finding ledge
-  if (!(quake_GetActionFlags(self) & QUAKE_FLAG_ACTION_LEDGEGRAB))
-  {
-    quake_GrabLedge();
-  }
-
   // dropping, break fall first
   if (velocity_z < 0)
   {
     tbx_AddVelocity
     (
       self,
-      QUAKE_PLAYER_JUMPVELOCITY / 5
+      QUAKE_PLAYER_JUMPVELOCITY * 0.2
     );
+    // FIXME: sound doesn't play here for some reason
+    quake_GrabLedge(QUAKE_SOUND_FOLEY_LEDGESLIP);
+    tbx_PrintDebug(tbx_GetFloatString(velocity_z));
+    tbx_PrintDebug(" \bslowing\b\n");
     return;
   }
 
@@ -199,4 +206,7 @@ void() quake_HandlePlayerLedgeGrab =
     self,
     velocity + QUAKE_PLAYER_JUMPVELOCITY
   );
+  quake_GrabLedge(QUAKE_SOUND_FOLEY_LEDGEGRAB);
+  tbx_PrintDebug(tbx_GetFloatString(velocity_z));
+  tbx_PrintDebug(" climbing\n");
 };

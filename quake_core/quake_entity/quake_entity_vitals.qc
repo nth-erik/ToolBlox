@@ -15,7 +15,7 @@ Applies damage.
 */
 void(entity targetEntity, float damage) quake_LoseHealth =
 {
-  // Pentagram prevents life loss
+  // Pentagram prevents life loss, minor damage doesn't wound
   if (tbx_GetItemFlags(targetEntity) & TBX_ITEMFLAG_PENTAGRAM || damage < 1)
     return;
 
@@ -55,7 +55,9 @@ float(entity targetEntity, float damage) quake_HitArmor =
   tbx_PrintDebug("\n");
 
   tbx_AddArmor(targetEntity, -armorDamage, 0, armor);
-  tbx_PrintClientCommand(targetEntity, "bf\n");
+  
+  if (healthDamage <= 0)
+    tbx_PrintClientCommand(targetEntity, "bf\n");
 
   return healthDamage;
 };
@@ -88,7 +90,9 @@ float(entity targetEntity, float damage) quake_MeltArmor =
   tbx_PrintDebug("\n");
 
   tbx_AddArmor(targetEntity, -damage, 0, armor);
-  tbx_PrintClientCommand(targetEntity, "bf\n");
+
+  if (healthDamage < 1)
+    tbx_PrintClientCommand(targetEntity, "bf\n");
 
   return healthDamage;
 };
@@ -116,20 +120,61 @@ void(entity targetEntity) quake_HandleFall =
   local float hitForce = hitSpeed / QUAKE_MAXVELOCITY;
 
   // we scale force up exponentially toward max damage (gib a Shambler)
+  // we scale force down when underwater
   hitForce =
   (
     hitForce * hitForce * hitForce * hitForce * hitForce *
     QUAKE_MAXFALLDAMAGE 
-  ) * (1 - tbx_GetSubmersion(targetEntity) / 10);
+  ) * (1 - tbx_GetSubmersion(targetEntity) * 0.1);
 
   quake_LoseHealth(targetEntity, hitForce);
+
   // thud volume determined by impact force
   tbx_PlaySound
   (
     self,
     TBX_SOUND_CHANNEL_BODY,
     TBX_SOUND_DROPTHUD,
-    tbx_GetMinimum(hitForce * 0.1, 1),
+    tbx_GetMinimum(hitForce * 0.5, 1),
+    TBX_SOUND_FALLOFF_NORMAL
+  );
+
+  // play voice based on impact
+  if (hitForce < 0.4)
+    return;
+
+  if (hitForce < 1)
+  {
+    tbx_PlaySound
+  (
+    self,
+    TBX_SOUND_CHANNEL_VOICE,
+    QUAKE_SOUND_PLAYER_UGH,
+    1,
+    TBX_SOUND_FALLOFF_NORMAL
+  );
+    return;
+  }
+
+  if (hitForce < 5)
+  {
+    tbx_PlaySound
+  (
+    self,
+    TBX_SOUND_CHANNEL_VOICE,
+    quake_GetPainSound(QUAKE_SOUNDSET_PLAYERPAIN),
+    1,
+    TBX_SOUND_FALLOFF_NORMAL
+  );
+    return;
+  }
+
+  tbx_PlaySound
+  (
+    self,
+    TBX_SOUND_CHANNEL_VOICE,
+    QUAKE_SOUND_PLAYER_FRACTURE,
+    1,
     TBX_SOUND_FALLOFF_NORMAL
   );
 };
@@ -151,26 +196,26 @@ void(entity targetEntity) quake_HandleSoakEffect =
   {
     // burn from lava
     if (soakTypes_x == TBX_POINTCONTENT_LAVA)
-      damageSum = damageSum + 1;
+      damageSum = damageSum + QUAKE_SOAKDAMAGE_KNEE;
 
     if (soakTypes_y == TBX_POINTCONTENT_LAVA)
-      damageSum = damageSum + 1.7;
+      damageSum = damageSum + QUAKE_SOAKDAMAGE_WAIST;
 
     if (soakTypes_z == TBX_POINTCONTENT_LAVA)
-      damageSum = damageSum + 2.3;
+      damageSum = damageSum + QUAKE_SOAKDAMAGE_EYE;
   }
       
   if (quake_GetSecond())
   {
     // burn from slime
     if (soakTypes_x == TBX_POINTCONTENT_SLIME)
-      damageSum = damageSum + 1;
+      damageSum = damageSum + QUAKE_SOAKDAMAGE_KNEE;
 
     if (soakTypes_y == TBX_POINTCONTENT_SLIME)
-      damageSum = damageSum + 1.7;
+      damageSum = damageSum + QUAKE_SOAKDAMAGE_WAIST;
 
     if (soakTypes_z == TBX_POINTCONTENT_SLIME)
-      damageSum = damageSum + 2.3;
+      damageSum = damageSum + QUAKE_SOAKDAMAGE_EYE;
   }
 
   if (quake_Get3Seconds())
@@ -184,19 +229,40 @@ void(entity targetEntity) quake_HandleSoakEffect =
 
   if (damageSum)
   {
-    // TODO: load and add actual sound
+    local float healthLoss = quake_MeltArmor(targetEntity, damageSum);
+
     tbx_PlaySound
     (
       self,
       TBX_SOUND_CHANNEL_BODY,
-      TBX_SOUND_SPITHIT,
-      damageSum * 0.2,
+      QUAKE_SOUND_PLAYER_SLIMEBURN,
+      damageSum / QUAKE_SOAKDAMAGE_MAX,
       TBX_SOUND_FALLOFF_NORMAL
     );
-    quake_LoseHealth(
-      targetEntity,
-      quake_MeltArmor(targetEntity, damageSum)
-    );
+
+    if (healthLoss >= 1)
+    {
+      quake_LoseHealth(
+        targetEntity,
+        healthLoss
+      );
+
+      if (tbx_GetHealth(self) <= 0)
+      {
+        tbx_SetVitals(self, TBX_VITALS_DYING);
+        // add death sound here
+        return;
+      }
+
+      tbx_PlaySound
+      (
+        self,
+        TBX_SOUND_CHANNEL_VOICE,
+        quake_GetPainSound(QUAKE_SOUNDSET_PLAYERBURN),
+        1,
+        TBX_SOUND_FALLOFF_NORMAL
+      );
+    }
   }
 };
 

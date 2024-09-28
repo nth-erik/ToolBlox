@@ -54,6 +54,7 @@ quake_core/quake_constant.qc                   // constant values
 quake_core/quake_variable.qc                   // variables
 
 // Game mechanics
+quake_core/quake_sound/quake_soundset.qc       // sound-sets management
 quake_core/quake_core.qc                       // game-state management
 quake_core/quake_entity/quake_entity.qc        // entity management
 quake_core/quake_entity/quake_entity_vitals.qc // entity vitals
