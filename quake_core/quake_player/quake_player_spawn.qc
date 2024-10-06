@@ -22,6 +22,7 @@ void() quake_OnPlayerSpawn =
   local float startMaxHealth = tbx_GetMaxHealth(playerStart);
   local float startHealth = tbx_GetHealth(playerStart);
   local float startItems = tbx_GetItems(playerStart);
+  local float startAirSupply = quake_GetAirSupply(playerStart);
 
   if (startMaxHealth == 0)
   {
@@ -33,9 +34,16 @@ void() quake_OnPlayerSpawn =
     startHealth = QUAKE_PLAYER_HEALTH;
   }
 
+  if (startAirSupply == 0)
+  {
+    startAirSupply = QUAKE_PLAYER_MAXAIRSUPPLY;
+  }
+
   tbx_SetMaxHealth(self, startMaxHealth);
   tbx_SetHealth(self, startHealth, QUAKE_PLAYER_MINHEALTH, startMaxHealth);
   tbx_SetVulnerability(self, TBX_VULNERABILITY_ALL);
+
+  quake_SetAirSupply(self, startAirSupply, startAirSupply, QUAKE_PLAYER_MAXAIRSUPPLY);
 
   tbx_SetSolidType(self, TBX_SOLIDTYPE_SLIDEBOX);
   tbx_SetMoveType(self, TBX_MOVETYPE_MOVE);

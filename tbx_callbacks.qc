@@ -202,6 +202,8 @@ void() tbx_OnWorldSpawn = {
   tbx_LoadSound(QUAKE_SOUND_PLAYER_DEATH3);
   tbx_LoadSound(QUAKE_SOUND_PLAYER_DEATH4);
   tbx_LoadSound(QUAKE_SOUND_PLAYER_DEATH5);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_GASP);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_COUGH);
   tbx_LoadSound(QUAKE_SOUND_FOLEY_LEDGEGRAB);
   tbx_LoadSound(QUAKE_SOUND_FOLEY_LEDGESLIP);
 };

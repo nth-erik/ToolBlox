@@ -7,11 +7,137 @@
 */
 
 /*
----------------
+--------------------------------------------------
+Check if alive
+
+Checks if the entity is dying or should die.
+Triggers death sound and sequence.
+
+targetEntity: entity to check and manage death for
+
+Returns FALSE if entity is dead or dying.
+Returns TRUE if entity is alive.
+--------------------------------------------------
+*/
+float(entity sourceEntity) quake_CheckAlive =
+{
+  // dying or dead, don't scream
+  if (tbx_GetVitals(self) != TBX_VITALS_ALIVE)
+    return FALSE;
+
+  // entity got killed, trigger dying
+  if (tbx_GetHealth(self) <= 0)
+  {
+    tbx_SetVitals(self, TBX_VITALS_DYING);
+    tbx_PlaySound
+    (
+      self,
+      TBX_SOUND_CHANNEL_VOICE,
+      quake_GetDeathSound(QUAKE_SOUNDSET_PLAYER),
+      1,
+      TBX_SOUND_FALLOFF_NORMAL
+    );
+
+    return FALSE;
+  }
+
+  // player is alive
+  return TRUE;
+};
+
+/*
+-----------------------------------------------
+Get air supply
+
+Returns the current entity air supply.
+
+sourceEntity: the entity to read the value from
+-----------------------------------------------
+*/
+float(entity sourceEntity) quake_GetAirSupply =
+{
+  return sourceEntity.quake_supply;
+};
+
+/*
+---------------------------------------------------
+Set air supply
+
+Updates the current entity air supply.
+Value is clamped between given minimum and maximum.
+
+targetEntity:  the entity to change the value for
+newAirSupply:     air supply to set
+minimumAirSupply: low cap
+maximumAirSupply: high cap
+---------------------------------------------------
+*/
+void(
+  entity targetEntity,
+  float newAirSupply,
+  float minimumAirSupply,
+  float maximumAirSupply
+) quake_SetAirSupply =
+{
+  if (newAirSupply < minimumAirSupply)
+    newAirSupply = minimumAirSupply;
+
+  if (newAirSupply > maximumAirSupply)
+    newAirSupply = maximumAirSupply;
+
+  tbx_PrintDebug("\nSet air supply: ");
+  tbx_PrintDebug(tbx_GetFloatString(newAirSupply));
+  tbx_PrintDebug("\n");
+
+  targetEntity.quake_supply = newAirSupply;
+};
+
+/*
+------------------------------------------------------
+Add air supply
+
+Adjusts the current entity air supply by passed value.
+Value is clamped between given minimum and maximum.
+
+Uses // .float supply // internally.
+
+targetEntity:     the entity to change the value for
+addAirSupply:     air supply to add (can be negative)
+minimumAirSupply: low cap
+maximumAirSupply: high cap
+------------------------------------------------------
+*/
+void(
+  entity targetEntity,
+  float addAirSupply,
+  float minimumAirSupply,
+  float maximumAirSupply
+) quake_AddAirSupply =
+{
+  float newAirSupply = targetEntity.quake_supply + addAirSupply;
+
+  if (newAirSupply < minimumAirSupply)
+    newAirSupply = minimumAirSupply;
+
+  if (newAirSupply > maximumAirSupply)
+    newAirSupply = maximumAirSupply;
+
+  tbx_PrintDebug("\nAir supply: ");
+  tbx_PrintDebug(tbx_GetFloatString(newAirSupply));
+  tbx_PrintDebug("\n");
+
+  targetEntity.quake_supply = newAirSupply;
+};
+
+/*
+------------------------------
 Lose health
 
-Applies damage.
----------------
+Applies damage to health.
+
+targetEntity: entity to damage
+damage:       damage to apply
+------------------------------
 */
 void(entity targetEntity, float damage) quake_LoseHealth =
 {
@@ -33,6 +159,9 @@ void(entity targetEntity, float damage) quake_LoseHealth =
 Hit armor
 
 Applies protection-capped damage to armor.
+
+targetEntity: entity to damage
+damage:       damage to apply
 
 Returns unprotected health damage.
 ------------------------------------------
@@ -68,6 +197,9 @@ Melt armor
 
 Applies full damage to armor.
 Use this for environment damage enveloping the player.
+
+targetEntity: entity to damage
+damage:       damage to apply
 
 Returns unprotected health damage.
 ------------------------------------------------------
@@ -180,6 +312,83 @@ void(entity targetEntity) quake_HandleFall =
 };
 
 /*
+------------------------------------
+Handle Drown Effect
+
+Applies effects based on air supply.
+------------------------------------
+*/
+void(entity targetEntity) quake_HandleDrownEffect =
+{
+  if (!quake_CheckAlive(targetEntity))
+    return;
+
+  local float airSupply = quake_GetAirSupply(targetEntity);
+  local float isSubmerged =
+  (
+    tbx_GetSubmersion(targetEntity) > TBX_SUBMERSION_WAIST
+  );
+
+  if (isSubmerged)
+  {
+    if (quake_GetSecond())
+    {
+      // must_hold_breath
+      quake_AddAirSupply(targetEntity, -1, QUAKE_PLAYER_MINAIRSUPPLY, airSupply);
+      airSupply = quake_GetAirSupply(targetEntity);
+      
+      if (airSupply < 0)
+      {
+        tbx_PlaySound
+        (
+          self,
+          TBX_SOUND_CHANNEL_VOICE,
+          quake_GetPainSound(QUAKE_SOUNDSET_PLAYER),
+          1,
+          TBX_SOUND_FALLOFF_NORMAL
+        );
+        quake_LoseHealth(targetEntity, tbx_GetCeiling(-airSupply * 0.3));
+      }
+
+    }
+    return; // do not surface
+  }
+
+  // only on tick
+  if (!quake_GetTick())
+    return;
+
+  // breathing air
+  if (airSupply < QUAKE_PLAYER_MAXAIRSUPPLY * 0.5)
+  {
+    if (airSupply < 0)
+    {
+      tbx_PlaySound
+      (
+        self,
+        TBX_SOUND_CHANNEL_VOICE,
+        QUAKE_SOUND_PLAYER_COUGH,
+        1,
+        TBX_SOUND_FALLOFF_NORMAL
+      );
+    }
+    else
+    {
+      tbx_PlaySound
+      (
+        self,
+        TBX_SOUND_CHANNEL_VOICE,
+        QUAKE_SOUND_PLAYER_GASP,
+        1,
+        TBX_SOUND_FALLOFF_NORMAL
+      );
+    }
+  }
+
+  quake_AddAirSupply(targetEntity, 1, QUAKE_PLAYER_MAXAIRSUPPLY * 0.5, QUAKE_PLAYER_MAXAIRSUPPLY);
+};
+
+/*
 ---------------------------------------------
 Handle Soak Effect
 
@@ -247,25 +456,8 @@ void(entity targetEntity) quake_HandleSoakEffect =
         healthLoss
       );
 
-      // TODO: extract death to vitals check
-      // dying or dead, no sound
-      if (tbx_GetVitals(self) != TBX_VITALS_ALIVE)
+      if (!quake_CheckAlive(targetEntity))
         return;
-
-      // player got killed, trigger dying
-      if (tbx_GetHealth(self) <= 0)
-      {
-        tbx_SetVitals(self, TBX_VITALS_DYING);
-        tbx_PlaySound
-        (
-          self,
-          TBX_SOUND_CHANNEL_VOICE,
-          quake_GetDeathSound(QUAKE_SOUNDSET_PLAYER),
-          1,
-          TBX_SOUND_FALLOFF_NORMAL
-        );
-        return;
-      }
 
       tbx_PlaySound
       (
@@ -312,5 +504,6 @@ void(entity targetEntity) quake_HandleSoak =
     quake_SetSoakTypes(targetEntity, newSoakTypes);
   }
 
+  quake_HandleDrownEffect(targetEntity);
   quake_HandleSoakEffect(targetEntity);
 };
