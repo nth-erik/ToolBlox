@@ -3,8 +3,8 @@ string(float soundset, float r) quake_Gulp =
   if (tbx_GetSubmersion(self) >= TBX_SUBMERSION_EYE)
   {
     if (
-      soundset == QUAKE_SOUNDSET_PLAYERPAIN ||
-      soundset == QUAKE_SOUNDSET_PLAYERBURN
+      soundset == QUAKE_SOUNDSET_PLAYER ||
+      soundset == QUAKE_SOUNDSET_PLAYERALT
     )
     {
       if (r < 0.5)
@@ -22,9 +22,9 @@ string(float soundset) quake_GetPainSound =
   local float r = tbx_GetRandomFloat();
   local string gulpSound;
 
-  if (soundset == QUAKE_SOUNDSET_PLAYERPAIN)
+  if (soundset == QUAKE_SOUNDSET_PLAYER)
   {
-    gulpSound = quake_Gulp(QUAKE_SOUNDSET_PLAYERPAIN, r);
+    gulpSound = quake_Gulp(QUAKE_SOUNDSET_PLAYER, r);
 
     if (gulpSound != "")
       return gulpSound;
@@ -42,9 +42,9 @@ string(float soundset) quake_GetPainSound =
     return QUAKE_SOUND_PLAYER_PAIN6;
   }
 
-  if (soundset == QUAKE_SOUNDSET_PLAYERBURN)
+  if (soundset == QUAKE_SOUNDSET_PLAYERALT)
   {
-    gulpSound = quake_Gulp(QUAKE_SOUNDSET_PLAYERBURN, r);
+    gulpSound = quake_Gulp(QUAKE_SOUNDSET_PLAYERALT, r);
 
     if (gulpSound != "")
       return gulpSound;
@@ -56,4 +56,28 @@ string(float soundset) quake_GetPainSound =
 
   // defaulting to spark hit sound
   return TBX_SOUND_SPARKHIT;
+};
+
+string(float soundset) quake_GetDeathSound =
+{
+  local float r = tbx_GetRandomFloat();
+
+  if (soundset == QUAKE_SOUNDSET_PLAYER)
+  {
+    if (tbx_GetSubmersion(self) >= TBX_SUBMERSION_EYE)
+      return QUAKE_SOUND_PLAYER_DROWN;
+    if (r < 0.2)
+      return QUAKE_SOUND_PLAYER_DEATH1;
+    if (r < 0.4)
+      return QUAKE_SOUND_PLAYER_DEATH2;
+    if (r < 0.6)
+      return QUAKE_SOUND_PLAYER_DEATH3;
+    if (r < 0.8)
+      return QUAKE_SOUND_PLAYER_DEATH4;
+    
+    return QUAKE_SOUND_PLAYER_DEATH5;
+  }
+
+  // defaulting to spark hit sound
+  return TBX_SOUND_DROPTHUD;
 };

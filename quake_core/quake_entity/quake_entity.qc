@@ -106,6 +106,8 @@ Get action flags
 Returns the current entity action flags:
   float QUAKE_FLAG_ACTION_LEDGEGRAB = 2048;  // Vaulting ledge
 
+Uses // .vector quake_flags; // internally.
+
 sourceEntity: the entity to read the value from
 ------------------------------------------------------------------------------
 */
@@ -125,6 +127,8 @@ Set action flags
 
 Updates the current entity action flags:
   float QUAKE_FLAG_ACTION_LEDGEGRAB = 2048;  // Vaulting ledge
+
+Uses // .vector quake_flags; // internally.
 
 NOTE: This setter pre-filters the flagset.
 

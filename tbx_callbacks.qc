@@ -82,10 +82,12 @@ Add your mod function here.
 */
 void() tbx_OnAfterPhysics =
 {
+  // handle player state
   quake_HandleSoak(self);
   quake_HandleFall(self);
+  // store old values for delta calculation
   quake_SetOldVelocity(self);
-  // update global timers
+  // update global tickers (these are absolute, not per-entity)
   quake_SetTick();
   quake_SetSecond();
   quake_Set3Seconds();
@@ -194,6 +196,12 @@ void() tbx_OnWorldSpawn = {
   tbx_LoadSound(QUAKE_SOUND_PLAYER_SCREAM2);
   tbx_LoadSound(QUAKE_SOUND_PLAYER_GULP1);
   tbx_LoadSound(QUAKE_SOUND_PLAYER_GULP2);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_DROWN);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_DEATH1);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_DEATH2);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_DEATH3);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_DEATH4);
+  tbx_LoadSound(QUAKE_SOUND_PLAYER_DEATH5);
   tbx_LoadSound(QUAKE_SOUND_FOLEY_LEDGEGRAB);
   tbx_LoadSound(QUAKE_SOUND_FOLEY_LEDGESLIP);
 };

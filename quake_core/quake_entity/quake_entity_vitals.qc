@@ -162,7 +162,7 @@ void(entity targetEntity) quake_HandleFall =
   (
     self,
     TBX_SOUND_CHANNEL_VOICE,
-    quake_GetPainSound(QUAKE_SOUNDSET_PLAYERPAIN),
+    quake_GetPainSound(QUAKE_SOUNDSET_PLAYER),
     1,
     TBX_SOUND_FALLOFF_NORMAL
   );
@@ -247,10 +247,23 @@ void(entity targetEntity) quake_HandleSoakEffect =
         healthLoss
       );
 
+      // TODO: extract death to vitals check
+      // dying or dead, no sound
+      if (tbx_GetVitals(self) != TBX_VITALS_ALIVE)
+        return;
+
+      // player got killed, trigger dying
       if (tbx_GetHealth(self) <= 0)
       {
         tbx_SetVitals(self, TBX_VITALS_DYING);
-        // add death sound here
+        tbx_PlaySound
+        (
+          self,
+          TBX_SOUND_CHANNEL_VOICE,
+          quake_GetDeathSound(QUAKE_SOUNDSET_PLAYER),
+          1,
+          TBX_SOUND_FALLOFF_NORMAL
+        );
         return;
       }
 
@@ -258,7 +271,7 @@ void(entity targetEntity) quake_HandleSoakEffect =
       (
         self,
         TBX_SOUND_CHANNEL_VOICE,
-        quake_GetPainSound(QUAKE_SOUNDSET_PLAYERBURN),
+        quake_GetPainSound(QUAKE_SOUNDSET_PLAYERALT),
         1,
         TBX_SOUND_FALLOFF_NORMAL
       );
