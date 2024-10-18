@@ -359,7 +359,7 @@ void(entity targetEntity) quake_HandleDrownEffect =
     return;
 
   // breathing air
-  if (airSupply < QUAKE_PLAYER_MAXAIRSUPPLY * 0.5)
+  if (airSupply < QUAKE_PLAYER_MAXAIRSUPPLY * 0.7)
   {
     if (airSupply < 0)
     {
@@ -385,7 +385,7 @@ void(entity targetEntity) quake_HandleDrownEffect =
     }
   }
 
-  quake_AddAirSupply(targetEntity, 1, QUAKE_PLAYER_MAXAIRSUPPLY * 0.5, QUAKE_PLAYER_MAXAIRSUPPLY);
+  quake_AddAirSupply(targetEntity, 1, QUAKE_PLAYER_MAXAIRSUPPLY * 0.7, QUAKE_PLAYER_MAXAIRSUPPLY);
 };
 
 /*

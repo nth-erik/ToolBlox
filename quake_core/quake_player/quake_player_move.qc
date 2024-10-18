@@ -141,13 +141,23 @@ void() quake_HandlePlayerLedgeGrab =
     orientation,
     TBX_DIRECTIONFLAG_FORWARD
   );
+  local vector right = tbx_GetRelativeDirection
+  (
+    orientation,
+    TBX_DIRECTIONFLAG_RIGHT
+  );
   local vector flatDirection = direction;
+  local vector ledgePosition;
 
   flatDirection_z = 0;
+  right_z = 0;
+
+  flatDirection = flatDirection * QUAKE_LEDGE_DISTANCE;
+  right = right * 4;
   
   // waist level check
   start = waist;
-  end = start + (flatDirection * QUAKE_LEDGE_DISTANCE);
+  end = start + flatDirection;
   tbx_Retrace();
   distanceData = tbx_GetTraceDistances
   (
@@ -166,7 +176,7 @@ void() quake_HandlePlayerLedgeGrab =
 
   // eye level check
   start = eye;
-  end = start + (flatDirection * QUAKE_LEDGE_DISTANCE);
+  end = start + flatDirection;
   tbx_Retrace();
   distanceData = tbx_GetTraceDistances
   (
@@ -177,6 +187,61 @@ void() quake_HandlePlayerLedgeGrab =
   );
 
   // no ledge
+  if (distanceData_x < 1)
+  {
+    quake_ReleaseLedge();
+    return;
+  }
+
+  // find grab height
+  start = waist + flatDirection;
+  end = start;
+  end_z = eye_z;
+  tbx_Retrace();
+  distanceData = tbx_GetTraceDistances
+  (
+    start,
+    end,
+    TBX_MONSTERCHECK_SKIP,
+    self
+  );
+  ledgePosition = start;
+  ledgePosition_z = ledgePosition_z + (end_z - start_z) * distanceData_x;
+  tbx_PrintDebug(tbx_GetFloatString(distanceData_y));
+  tbx_PrintDebug("\n");
+
+  // check right slope
+  start = ledgePosition;
+  end = ledgePosition + right;
+  tbx_Retrace();
+  distanceData = tbx_GetTraceDistances
+  (
+    start,
+    end,
+    TBX_MONSTERCHECK_SKIP,
+    self
+  );
+
+  // on right slope
+  if (distanceData_x < 1)
+  {
+    quake_ReleaseLedge();
+    return;
+  }
+
+  // check left slope
+  start = ledgePosition;
+  end = ledgePosition - right;
+  tbx_Retrace();
+  distanceData = tbx_GetTraceDistances
+  (
+    start,
+    end,
+    TBX_MONSTERCHECK_SKIP,
+    self
+  );
+
+  // on left slope
   if (distanceData_x < 1)
   {
     quake_ReleaseLedge();

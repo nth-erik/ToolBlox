@@ -78,6 +78,22 @@ string(float soundset) quake_GetDeathSound =
     return QUAKE_SOUND_PLAYER_DEATH5;
   }
 
-  // defaulting to spark hit sound
+  // defaulting to drop thud sound
   return TBX_SOUND_DROPTHUD;
+};
+
+string(float soundset) quake_GetSwimSound =
+{
+  local float r = tbx_GetRandomFloat();
+
+  if (soundset == QUAKE_SOUNDSET_PLAYER)
+  {
+    if (r < 0.5)
+      return QUAKE_SOUND_FOLEY_SWIM1;
+    
+    return QUAKE_SOUND_FOLEY_SWIM2;
+  }
+
+  // defaulting to spit hit sound
+  return TBX_SOUND_SPITHIT;
 };

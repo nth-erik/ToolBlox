@@ -40,6 +40,22 @@ void() tbx_OnBeforePhysics =
   }
 
   local vector inputs = tbx_CheckInputs(self);
+  local vector velocity = tbx_GetVelocity(self);
+
+  // swim sound on every second
+  if (
+    quake_GetSecond() && tbx_GetSubmersion(self) >= TBX_SUBMERSION_EYE &&
+    velocity_x && velocity_y && velocity_z
+  )
+  {
+    tbx_PlaySound(
+      self,
+      TBX_SOUND_CHANNEL_BODY,
+      quake_GetSwimSound(QUAKE_SOUNDSET_PLAYER),
+      1,
+      TBX_SOUND_CHANNEL_BODY
+    );
+  }
 
   // jump controls
   if (inputs_z) {
@@ -206,6 +222,10 @@ void() tbx_OnWorldSpawn = {
   tbx_LoadSound(QUAKE_SOUND_PLAYER_COUGH);
   tbx_LoadSound(QUAKE_SOUND_FOLEY_LEDGEGRAB);
   tbx_LoadSound(QUAKE_SOUND_FOLEY_LEDGESLIP);
+  tbx_LoadSound(QUAKE_SOUND_FOLEY_SWIM1);
+  tbx_LoadSound(QUAKE_SOUND_FOLEY_SWIM2);
+  // DEBUG
+  tbx_LoadModel("progs/spike.mdl");
 };
 
 /*
